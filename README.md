@@ -36,5 +36,5 @@ sh run.sh
 ### 4. ...
 
 ## 项目部分框架（待完善）
-![1](https://github.com/LingFengGold/SDUVisualization/blob/main/pic/1.png)
-![2](https://github.com/LingFengGold/SDUVisualization/blob/main/pic/2.png)
+![frame-of-dashboard](https://github.com/LingFengGold/SDUVisualization/blob/main/pic/frame-of-dashboard.png)
+![time-table](https://github.com/LingFengGold/SDUVisualization/blob/main/pic/time-table.png)
