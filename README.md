@@ -16,7 +16,7 @@
 - ...
 
 ### 项目框架构想
-!\[markdown picture](../src/frame-of-dashboard.png)
+![anchor text](../src/frame-of-dashboard.png)
 
 ## 1. Get Started
 
