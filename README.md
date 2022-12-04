@@ -15,6 +15,9 @@
 - 最新讯息板（测试）
 - ...
 
+### 项目框架构想
+!\[markdown picture](../src/frame-of-dashboard.png)
+
 ## 1. Get Started
 
 ```python
