@@ -15,6 +15,8 @@
 - 最新讯息板（测试）
 - ...
 
+## 安装与完善
+
 ### 1. Get Started
 
 ```python
@@ -29,7 +31,7 @@ sh run.sh
   ```
 - Edit the codes to your needs. 
 
-### 3. 待完善...
+### 3. 待补完...
 
 ### 4. ...
 
