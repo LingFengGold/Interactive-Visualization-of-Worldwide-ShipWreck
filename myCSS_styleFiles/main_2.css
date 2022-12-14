@@ -1,0 +1,90 @@
+text {
+    font-size: 16px;
+}
+
+#control-row {
+    padding-bottom: 20px;
+}
+
+.container-fluid {
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-top: 15px;
+}
+
+a {
+    cursor: pointer
+}
+
+
+/* 
+h4,
+h2 {
+    font-family: Helvetica;
+} */
+
+h4 {
+    margin-top: 4.4px;
+}
+
+
+/* P {
+    text-align: center
+} */
+
+#wrapper {
+    width: 960px;
+    margin: -30px auto 0;
+}
+
+#map {
+    width: 960px;
+    height: 580px;
+    position: relative;
+}
+
+.stroke {
+    fill: none;
+    stroke: #888;
+    stroke-width: 2px;
+}
+
+.fill {
+    fill: #fff;
+}
+
+.graticule {
+    fill: none;
+    stroke: #777;
+    stroke-width: .5px;
+    stroke-opacity: .5;
+}
+
+.land {
+    fill: #222;
+}
+
+.boundary {
+    fill: none;
+    stroke: #fff;
+    stroke-width: .5px;
+}
+
+.country {
+    fill: rgb(179, 96, 28);
+    stroke: white;
+}
+
+#play,
+#clock {
+    position: absolute;
+    top: 200px;
+}
+
+#play {
+    left: 15px;
+}
+
+#clock {
+    left: 65px;
+}
