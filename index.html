@@ -283,7 +283,7 @@
                     injuryChart
                         .width(280)
                         .height(320)
-                        .ordinalColors(['#493F3F', 'lightgreen', 'orange', 'darkblue', 'red'])
+                        .ordinalColors(['lightgreen', 'orange', 'darkblue', 'red'])
                         .dimension(injuryDim)
                         .group(injuryGroup)
                         .innerRadius(20)
@@ -456,8 +456,9 @@
                         .renderlet(function(chart) {
                             chart.selectAll("g.x text")
                                 // .attr('dx', '-30')
-                                .attr('dx', '-35')
-                                .attr('transform', "rotate(-45)");
+                                .attr('dx', '-20')
+                                .attr('dy', '25')
+                                .attr('transform', "rotate(-15)");
                         });
                     // continentCountBarChart.xAxis().tickValues(continentDim);
 
@@ -487,8 +488,9 @@
                         .renderlet(function(chart) {
                             chart.selectAll("g.x text")
                                 // .attr('dx', '-30')
-                                .attr('dx', '-35')
-                                .attr('transform', "rotate(-45)");
+                                .attr('dx', '-20')
+                                .attr('dy', '25')
+                                .attr('transform', "rotate(-15)");
                         });
                     // causeCountBarChart.xAxis().tickValues(d3.range(d["cause"].length()));
 
