@@ -555,6 +555,7 @@
                                 var year = d["YEARSUNK"];
                                 var link = d["href_formula"];
                                 var gp_quality = d["GP_QUALITY"];
+                                var history = d["HISTORY"];
                                 // var marker = L.marker([loc.lat, loc.lng]);
                                 // var marker = L.marker([latitude, longitude]);
                                 // var geojsonMarkerOptions = {
@@ -606,6 +607,7 @@
                                     "<b> Location: </b>" + location + "<br>" +
                                     "<b> Year: </b>" + year + "<br>" +
                                     "<b> GP_QUALITY: </b>" + gp_quality + "<br>" +
+                                    "<b> History: </b>" + history + "<br>" +
                                     // "Link: " + link + "<br>");;
                                     "<b> Link: </b>" + '<a href= "' + link + '" target="_blank">' + "View Report" + "</a>" + "<br>");;
                                 wreckMarkers.addLayer(marker);
