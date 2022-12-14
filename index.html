@@ -80,11 +80,11 @@
                         <div class="dc-chart" id="chart-ring-injury"></div>
                     </div>
                     <div class="col-xs-6 col-md-4">
-                        <h4>Continent</h4>
+                        <h4>Sounding Type</h4>
                         <div class="dc-chart" id="chart-continent-count"></div>
                     </div>
                     <div class="col-xs-6 col-md-4">
-                        <h4>Cause of Injury</h4>
+                        <h4>Feature Type</h4>
                         <div class="dc-chart" id="chart-cause-count"></div>
                     </div>
                 </div>
@@ -219,10 +219,10 @@
                         return d["GP_QUALITY"];
                     });
                     var continentDim = ndx.dimension(function(d) {
-                        return d["continent"];
+                        return d["SOUNDING_TYPE"];
                     });
                     var causeDim = ndx.dimension(function(d) {
-                        return d["type"];
+                        return d["FEATURE_TYPE"];
                     });
                     var allDim = ndx.dimension(function(d) {
                         return d;
