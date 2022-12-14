@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Worldwide Shark Attacks</title>
+    <title>Worldwide Wreck Locations</title>
     <meta charset="UTF-8">
     <link rel="icon" href="images/shark_icon.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="JS_CSS_downloaded_libraries/dc.css">
@@ -17,7 +17,7 @@
         <!-- 1st row - map title  -->
         <div class="row">
             <div class="col-xs-12 dc-data-count dc-chart" id="data-count">
-                <h3><b>Interactive Visualization of Worldwide Shark Attacks</b></h3>
+                <h3><b>Interactive Visualization of Worldwide Wreck</b></h3>
 
                 <!-- Trigger the modal with a button -->
 
@@ -25,7 +25,7 @@
                 <!-- 2nd row - subtitle and data count  -->
                 <div class="row">
                     <div class="col-xs-12 dc-data-count dc-chart" id="data-count">
-                        <h4>Sharks Attacks
+                        <h4>Wrecks
                             <small>
             <span class="filter-count"></span> selected out of <span class="total-count"></span> records |
             <a id="all" href="#">Reset All</a>
@@ -52,12 +52,12 @@
                 <!-- 3rd row - map -->
                 <div class="row" id="control-row">
                     <div class="col-xs-8">
-                        <!-- <h4>Shark Attacks Marker Map
-                            <a href="index_2.html" style="color:black;">| Shark Attacks Choropleth Map </a>
+                        <!-- <h4>Wrecks Marker Map
+                            <a href="index_2.html" style="color:black;">| Wrecks Choropleth Map </a>
                         </h4> -->
 
                         <h4>
-                            Shark Attacks Marker Map | <a href="index_2.html">Shark Attacks Choropleth Map</a>
+                            Wrecks Marker Map | <a href="index_2.html">Wrecks Choropleth Map</a>
                         </h4>
 
                         <p><i>(<span style="color:red">red</span> points: fatal cases; <span style="color:orange">orange</span>: non-fatal cases; <span style="color: #493F3F">gray</span>: unknown cases)</i></p>
@@ -540,7 +540,7 @@
                             // each time table is rendered remove nasty extra row dc.js insists on adding
                             table.select('tr.dc-table-group').remove();
 
-                            // update map with shark attacks to match filtered data
+                            // update map with Wrecks to match filtered data
                             sharkMarkers.clearLayers();
                             _.each(allDim.top(Infinity), function(d) {
                                 // var loc = d.brewery.location;
@@ -655,17 +655,17 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">About Info for Worldwide Shark Attacks Web Map App</h4>
+                            <h4 class="modal-title">About Info for Worldwide Wrecks Web Map App</h4>
                         </div>
                         <div class="modal-body">
-                            <p><strong>About the Project:</strong> Shark attacks are global traumatic events that generate social and economic costs. Shark attacks on human beings leading to various types of injuries and even death in some cases is not uncommon.
-                                Improved understanding of shark attacks risks may help to inform shark management strategies, help human beings to better understand risk factors leading to such attacks and ultimately help to improve human safety, and
+                            <p><strong>About the Project:</strong> Wrecks are global traumatic events that generate social and economic costs. Wrecks on human beings leading to various types of injuries and even death in some cases is not uncommon.
+                                Improved understanding of Wrecks risks may help to inform shark management strategies, help human beings to better understand risk factors leading to such attacks and ultimately help to improve human safety, and
                                 shark conservation.
                                 <p>
-                                    <p>This project aims to interactively visualize shark attacks cases across the globe by developing an interactive web application using the data collected by Global Shark Attack File. This project will apply visual analytics
-                                        techniques to effectively demonstrate shark attacks over time in a more dynamic and interactive way.</p>
-                                    <p>The original global shark attack data was collected and provided by the Global Shark Attack File. Global Shark Attack File is a global dataset of shark attacks, which contains information on over 6,300 shark attacks,
-                                        and includes detailed, often privileged, information including reports and photos. The global shark attack data used in this project was downloaded from Kaggle.
+                                    <p>This project aims to interactively visualize Wrecks cases across the globe by developing an interactive web application using the data collected by Global Wreck File. This project will apply visual analytics
+                                        techniques to effectively demonstrate Wrecks over time in a more dynamic and interactive way.</p>
+                                    <p>The original global Wreck data was collected and provided by the Global Wreck File. Global Wreck File is a global dataset of Wrecks, which contains information on over 6,300 Wrecks,
+                                        and includes detailed, often privileged, information including reports and photos. The global Wreck data used in this project was downloaded from Kaggle.
                                     </p>
                                     <p><a href="https://www.youtube.com/watch?v=msUhvIH7XXw" target="_blank"><i>(web app demo video)</i></a></p>
                                     <strong>About the People:</strong>
@@ -677,9 +677,9 @@
 
                                     <strong>Data source:</strong>
 
-                                    <p> <a href="http://www.sharkattackfile.net/index.htm" target="_blank">Global Shark Attack File </a></p>
+                                    <p> <a href="http://www.sharkattackfile.net/index.htm" target="_blank">Global Wreck File </a></p>
 
-                                    <p><a href="https://www.kaggle.com/teajay/global-shark-attacks" target="_blank">Kaggle - Global Shark Attacks </a></p>
+                                    <p><a href="https://www.kaggle.com/teajay/global-shark-attacks" target="_blank">Kaggle - Global Wrecks </a></p>
 
 
                                     <strong>Acknowledgements:</strong>
