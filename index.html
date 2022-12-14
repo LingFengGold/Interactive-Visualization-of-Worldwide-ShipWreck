@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Worldwide Wreck Locations</title>
     <meta charset="UTF-8">
-    <link rel="icon" href="images/shark_icon.png" type="image/x-icon">
+    <link rel="icon" href="images/wreck_icon.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="JS_CSS_downloaded_libraries/dc.css">
     <link rel="stylesheet" type="text/css" href="JS_CSS_downloaded_libraries/leaflet.css">
     <link rel="stylesheet" type="text/css" href="JS_CSS_downloaded_libraries/bootstrap.css">
@@ -76,7 +76,7 @@
                             <div class="dc-chart" id="chart-ring-season"></div>
                         </div> -->
                     <div class="col-xs-4 pie-chart">
-                        <h4>Injury Type <small><a id="injury" href="#">reset</a></small></h4>
+                        <h4>GP-Quality Type <small><a id="injury" href="#">reset</a></small></h4>
                         <div class="dc-chart" id="chart-ring-injury"></div>
                     </div>
                     <div class="col-xs-6 col-md-4">
@@ -123,7 +123,7 @@
                         <table class="table table-bordered table-striped" id="data-table">
                             <thead>
                                 <tr class="header">
-                                    <th>Country</th>
+                                    <th>Vesslterms</th>
                                     <th>Area</th>
                                     <th>Location</th>
                                     <th>Date</th>
@@ -131,7 +131,7 @@
                                     <th>Activity</th>
                                     <th>Gender</th>
                                     <th>Age</th>
-                                    <th>Shark Species</th>
+                                    <th>Feature</th>
 
                                 </tr>
                             </thead>
@@ -151,7 +151,7 @@
             <script type="text/javascript">
                 /* instantiate and configure map */
                 var map = L.map('map');
-                var sharkMarkers = new L.FeatureGroup();
+                var wreckMarkers = new L.FeatureGroup();
 
                 // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 //   id: '<your id here>',
@@ -176,7 +176,7 @@
                 // d3.json('untappd.json', function(error, data) {
 
                 /* Parse csv file, create charts, draw markers on map */
-                d3.csv("data/revised_attacks_final_2.csv", function(error, data) {
+                d3.csv("data/AWOIS_Wrecks.csv", function(error, data) {
                     // var beerData = data.response.beers.items;
 
                     // var fullDateFormat = d3.time.format('%a, %d %b %Y %X %Z');
@@ -216,7 +216,7 @@
                         return d["season"];
                     });
                     var injuryDim = ndx.dimension(function(d) {
-                        return d["fatal"];
+                        return d["GP_QUALITY"];
                     });
                     var continentDim = ndx.dimension(function(d) {
                         return d["continent"];
@@ -283,7 +283,7 @@
                     injuryChart
                         .width(280)
                         .height(320)
-                        .ordinalColors(['#493F3F', 'red', 'orange'])
+                        .ordinalColors(['#493F3F', 'lightgreen', 'orange', 'darkblue', 'red'])
                         .dimension(injuryDim)
                         .group(injuryGroup)
                         .innerRadius(20)
@@ -505,7 +505,7 @@
                         .size(100)
                         .columns([
                             function(d) {
-                                return d["country_captalized"];
+                                return d["VESSLTERMS"];
                             },
                             function(d) {
                                 return d["area"];
@@ -529,7 +529,7 @@
                                 return d["age"];
                             },
                             function(d) {
-                                return d["species "];
+                                return d["FEATURE_TYPE"];
                             },
 
                         ])
@@ -541,18 +541,18 @@
                             table.select('tr.dc-table-group').remove();
 
                             // update map with Wrecks to match filtered data
-                            sharkMarkers.clearLayers();
+                            wreckMarkers.clearLayers();
                             _.each(allDim.top(Infinity), function(d) {
                                 // var loc = d.brewery.location;
                                 // this is the code for the geospatial Long/Lat
-                                var longitude = d["location_georeferenced_lon"];
-                                var latitude = d["location_georeferenced_lat"];
-                                var country = d["country_captalized"];
+                                var longitude = d["LONDEC"];
+                                var latitude = d["LATDEC"];
+                                var vessel = d["VESSLTERMS"];
                                 var area = d["area"];
                                 var location = d["location"]
-                                var year = d["year"];
+                                var year = d["YEARSUNK"];
                                 var link = d["href_formula"];
-                                var fatal = d["fatal"];
+                                var gp_quality = d["GP_QUALITY"];
                                 // var marker = L.marker([loc.lat, loc.lng]);
                                 // var marker = L.marker([latitude, longitude]);
                                 // var geojsonMarkerOptions = {
@@ -564,7 +564,7 @@
                                 //     fillOpacity: 0.8
                                 // };
                                 // var marker = L.marker([latitude, longitude], geojsonMarkerOptions);
-                                // var marker = L.marker([latitude, longitude], geojsonMarkerOptions);
+                                // var marker = L.marker([latitude, longitude], ge ojsonMarkerOptions);
 
                                 var fillColor_Var = "";
 
@@ -576,12 +576,16 @@
                                 //   fillColor_Var = "yellow";
                                 // }
 
-                                if (fatal == "fatal") {
+                                if (gp_quality == "Poor") {
                                     fillColor_Var = "red";
-                                } else if (fatal == "non-fatal") {
+                                } else if (gp_quality == "Low") {
                                     fillColor_Var = "orange";
+                                } else if (gp_quality == "High"){
+                                    fillColor_Var = "lightgreen";
+                                } else if (gp_quality == "Med"){
+                                    fillColor_Var = "darkblue";
                                 } else {
-                                    fillColor_Var = "#493F3F";
+                                    fillColor_Var = "#493F3F"
                                 }
 
                                 var marker = L.circleMarker([latitude, longitude], {
@@ -595,17 +599,17 @@
 
 
                                 // marker.bindPopup("<p>" + name + " " + loc.brewery_city + " " + loc.brewery_state + "</p>");
-                                marker.bindPopup("<b> Country: </b>" + country + "<br>" +
+                                marker.bindPopup("<b> Vesselterm: </b>" + vessel + "<br>" +
                                     "<b> Area: </b>" + area + "<br>" +
                                     "<b> Location: </b>" + location + "<br>" +
                                     "<b> Year: </b>" + year + "<br>" +
-                                    "<b> Injury: </b>" + fatal + "<br>" +
+                                    "<b> GP_QUALITY: </b>" + gp_quality + "<br>" +
                                     // "Link: " + link + "<br>");;
                                     "<b> Link: </b>" + '<a href= "' + link + '" target="_blank">' + "View Report" + "</a>" + "<br>");;
-                                sharkMarkers.addLayer(marker);
+                                wreckMarkers.addLayer(marker);
                             });
-                            map.addLayer(sharkMarkers);
-                            map.fitBounds(sharkMarkers.getBounds());
+                            map.addLayer(wreckMarkers);
+                            map.fitBounds(wreckMarkers.getBounds());
                         });
 
                     // register handlers
@@ -659,8 +663,8 @@
                         </div>
                         <div class="modal-body">
                             <p><strong>About the Project:</strong> Wrecks are global traumatic events that generate social and economic costs. Wrecks on human beings leading to various types of injuries and even death in some cases is not uncommon.
-                                Improved understanding of Wrecks risks may help to inform shark management strategies, help human beings to better understand risk factors leading to such attacks and ultimately help to improve human safety, and
-                                shark conservation.
+                                Improved understanding of Wrecks risks may help to inform wreck management strategies, help human beings to better understand risk factors leading to such attacks and ultimately help to improve human safety, and
+                                wreck conservation.
                                 <p>
                                     <p>This project aims to interactively visualize Wrecks cases across the globe by developing an interactive web application using the data collected by Global Wreck File. This project will apply visual analytics
                                         techniques to effectively demonstrate Wrecks over time in a more dynamic and interactive way.</p>
@@ -677,9 +681,9 @@
 
                                     <strong>Data source:</strong>
 
-                                    <p> <a href="http://www.sharkattackfile.net/index.htm" target="_blank">Global Wreck File </a></p>
+                                    <p> <a href="http://www.wreckattackfile.net/index.htm" target="_blank">Global Wreck File </a></p>
 
-                                    <p><a href="https://www.kaggle.com/teajay/global-shark-attacks" target="_blank">Kaggle - Global Wrecks </a></p>
+                                    <p><a href="https://www.kaggle.com/teajay/global-wreck-attacks" target="_blank">Kaggle - Global Wrecks </a></p>
 
 
                                     <strong>Acknowledgements:</strong>
