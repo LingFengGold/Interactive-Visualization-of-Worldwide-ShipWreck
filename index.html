@@ -57,7 +57,7 @@
                         </h4> -->
 
                         <h4>
-                            Wrecks Marker Map | <a href="index_2.html">Wrecks Choropleth Map</a>
+                            Wrecks Marker Map
                         </h4>
 
                         <p><i>(<span style="color:lightgreen">green</span> points: High GP-Quality; <span style="color:darkblue">blue</span>: Med GP-Quality; <span style="color:orange">orange</span>: Low GP-Quality; <span style="color:red">red</span>: Poor GP-Quality; <span style="color: #493F3F">gray</span>: Unknown)</i></p>
@@ -71,19 +71,19 @@
                 </div>
                 <!-- 4th row - pie charts and bar charts -->
                 <div class="row" id="control-row">
-                    <!-- <div class="col-xs-3 pie-chart">
-                            <h4>Season <small><a id="season">reset</a></small></h4>
-                            <div class="dc-chart" id="chart-ring-season"></div>
-                        </div> -->
-                    <div class="col-xs-4 pie-chart">
+                    <div class="col-xs-3 pie-chart">
+                        <h4>Sunk Year <small><a id="year">reset</a></small></h4>
+                        <div class="dc-chart" id="chart-ring-year"></div>
+                    </div>
+                    <div class="col-xs-3 pie-chart">
                         <h4>GP-Quality Type <small><a id="injury" href="#">reset</a></small></h4>
                         <div class="dc-chart" id="chart-ring-injury"></div>
                     </div>
-                    <div class="col-xs-6 col-md-4">
+                    <div class="col-xs-6 col-md-3">
                         <h4>Sounding Type <small><a id="sound" href="#">reset</a></small></h4>
                         <div class="dc-chart" id="chart-continent-count"></div>
                     </div>
-                    <div class="col-xs-6 col-md-4">
+                    <div class="col-xs-6 col-md-3">
                         <h4>Feature Type <small><a id="feature" href="#">reset</a></small></h4>
                         <div class="dc-chart" id="chart-cause-count"></div>
                     </div>
@@ -124,15 +124,13 @@
                             <thead>
                                 <tr class="header">
                                     <th>Vesslterms</th>
-                                    <th>Area</th>
-                                    <th>Location</th>
-                                    <th>Date</th>
-                                    <th>Cause</th>
-                                    <th>Activity</th>
-                                    <th>Gender</th>
-                                    <th>Age</th>
-                                    <th>Feature</th>
-
+                                    <th>Feature Type</th>
+                                    <th>Latdec</th>
+                                    <th>Londec</th>
+                                    <th>GP_Quality</th>
+                                    <th>Depth</th>
+                                    <th>Sound Type</th>
+                                    <th>Year Sunk</th>
                                 </tr>
                             </thead>
                         </table>
@@ -216,6 +214,10 @@
                         if(d["DEPTH"] == "") return "Unknown";
                         return d["DEPTH"] >= 20 ? "≥20m" : "<20m";
                     });
+                    var yearDim = ndx.dimension(function(d) {
+                        if(d["YEARSUNK"] == "") return "Unknown";
+                        return "Known"
+                    });
                     var injuryDim = ndx.dimension(function(d) {
                         return d["GP_QUALITY"];
                     });
@@ -260,11 +262,13 @@
                     var seasonGroup = seasonDim.group().reduceCount(),
                         injuryGroup = injuryDim.group().reduceCount(),
                         continentGroup = continentDim.group().reduceCount(),
+                        yearGroup = yearDim.group().reduceCount(),
                         causeGroup = causeDim.group().reduceCount();
 
                     // specify charts
                     // This is where the chart variable is defined.
                     var seasonChart = dc.pieChart('#chart-ring-season'),
+                        yearChart = dc.pieChart('#chart-ring-year'),
                         injuryChart = dc.pieChart('#chart-ring-injury'),
                         // dayChart = dc.pieChart('#chart-ring-day'),
                         // ratingCountChart = dc.barChart('#chart-rating-count'),
@@ -288,7 +292,21 @@
                         .dimension(injuryDim)
                         .group(injuryGroup)
                         .innerRadius(20)
-
+                        
+                    yearChart
+                        .width(280)
+                        .height(320)
+                        .ordinalColors(['#88d670', '#ff4e50'])
+                        .dimension(yearDim)
+                        .group(yearGroup)
+                        .innerRadius(20)
+                        .ordering(function(d) {
+                            var order = {
+                                'Known': 1,
+                                'Unknown': 2
+                            };
+                            return order[d.key];
+                        });
 
                     // monthChart
                     //     .width(150)
@@ -330,6 +348,8 @@
                             };
                             return order[d.key];
                         });
+                    
+
 
                     // dayChart
                     //     .width(150)
@@ -511,28 +531,25 @@
                                 return d["VESSLTERMS"];
                             },
                             function(d) {
-                                return d["area"];
-                            },
-                            function(d) {
-                                return d["location"];
-                            },
-                            function(d) {
-                                return d["date_revised"];
-                            },
-                            function(d) {
-                                return d["type"];
-                            },
-                            function(d) {
-                                return d["activity"];
-                            },
-                            function(d) {
-                                return d["sex"];
-                            },
-                            function(d) {
-                                return d["age"];
-                            },
-                            function(d) {
                                 return d["FEATURE_TYPE"];
+                            },
+                            function(d) {
+                                return d["LATDEC"];
+                            },
+                            function(d) {
+                                return d["LONDEC"];
+                            },
+                            function(d) {
+                                return d["GP_QUALITY"];
+                            },
+                            function(d) {
+                                return d["DEPTH"];
+                            },
+                            function(d) {
+                                return d["SOUNDING_TYPE"];
+                            },
+                            function(d) {
+                                return d["YEARSUNK"];
                             },
 
                         ])
@@ -551,7 +568,7 @@
                                 var longitude = d["LONDEC"];
                                 var latitude = d["LATDEC"];
                                 var vessel = d["VESSLTERMS"];
-                                var area = d["area"];
+                                var depth = d["DEPTH"];
                                 var location = d["location"];
                                 var year = d["YEARSUNK"];
                                 var link = d["href_formula"];
@@ -604,10 +621,10 @@
 
                                 // marker.bindPopup("<p>" + name + " " + loc.brewery_city + " " + loc.brewery_state + "</p>");
                                 marker.bindPopup("<b> Vesselterm: </b>" + vessel + "<br>" +
-                                    "<b> Area: </b>" + area + "<br>" +
-                                    "<b> Location: </b>" + location + "<br>" +
-                                    "<b> Year: </b>" + year + "<br>" +
-                                    "<b> GP_QUALITY: </b>" + gp_quality + "<br>" +
+                                    "<b> Depth: </b>" + depth + "<br>" +
+                                    "<b> Location: </b>" + '(' + longitude + ',' + latitude + ')' + "<br>" +
+                                    "<b> Sunk Year: </b>" + year + "<br>" +
+                                    "<b> GP Quality: </b>" + gp_quality + "<br>" +
                                     "<b> History: </b>" + history + "<br>" +
                                     // "Link: " + link + "<br>");;
                                     "<b> Link: </b>" + '<a href= "' + link + '" target="_blank">' + "View Report" + "</a>" + "<br>");;
@@ -640,6 +657,11 @@
 
                     d3.selectAll('a#season').on('click', function() {
                         seasonChart.filterAll();
+                        dc.redrawAll();
+                    });
+
+                    d3.selectAll('a#year').on('click', function() {
+                        yearChart.filterAll();
                         dc.redrawAll();
                     });
 
