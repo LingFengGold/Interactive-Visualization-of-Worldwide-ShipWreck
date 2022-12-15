@@ -80,11 +80,11 @@
                         <div class="dc-chart" id="chart-ring-injury"></div>
                     </div>
                     <div class="col-xs-6 col-md-4">
-                        <h4>Sounding Type</h4>
+                        <h4>Sounding Type <small><a id="sound" href="#">reset</a></small></h4>
                         <div class="dc-chart" id="chart-continent-count"></div>
                     </div>
                     <div class="col-xs-6 col-md-4">
-                        <h4>Feature Type</h4>
+                        <h4>Feature Type <small><a id="feature" href="#">reset</a></small></h4>
                         <div class="dc-chart" id="chart-cause-count"></div>
                     </div>
                 </div>
@@ -645,6 +645,16 @@
 
                     d3.selectAll('a#injury').on('click', function() {
                         injuryChart.filterAll();
+                        dc.redrawAll();
+                    });
+
+                    d3.selectAll('a#sound').on('click', function() {
+                        continentCountBarChart.filterAll();
+                        dc.redrawAll();
+                    });
+
+                    d3.selectAll('a#feature').on('click', function() {
+                        causeCountBarChart.filterAll();
                         dc.redrawAll();
                     });
 
