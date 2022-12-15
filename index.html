@@ -213,7 +213,8 @@
                     //     }),
 
                     var seasonDim = ndx.dimension(function(d) {
-                        return d["season"];
+                        if(d["DEPTH"] == "") return "Unknown";
+                        return d["DEPTH"] >= 20 ? "≥20m" : "<20m";
                     });
                     var injuryDim = ndx.dimension(function(d) {
                         return d["GP_QUALITY"];
@@ -551,7 +552,7 @@
                                 var latitude = d["LATDEC"];
                                 var vessel = d["VESSLTERMS"];
                                 var area = d["area"];
-                                var location = d["location"]
+                                var location = d["location"];
                                 var year = d["YEARSUNK"];
                                 var link = d["href_formula"];
                                 var gp_quality = d["GP_QUALITY"];
