@@ -28,30 +28,3 @@
 
 ## 项目部署
 当前项目已部署至GitHubio
-
-
---------------------------------------------------------------
-
-## 安装与运行
-
-### 1. Get Started
-
-```python
-sh run.sh
-```
-
-### 2. Clone & Edit the Code
-
-- Clone this repo and install requirements.
-  ```bash
-  $ git clone https://github.com/LingFengGold/SDUVisualization
-  ```
-- Edit the codes to your needs. 
-
-### 3. 待补完...
-
-### 4. ...
-
-## 项目部分框架（待完善）
-![frame-of-dashboard](https://github.com/LingFengGold/SDUVisualization/blob/main/src/frame-of-dashboard.png)
-![time-table](https://github.com/LingFengGold/SDUVisualization/blob/main/src/time-table.png)
