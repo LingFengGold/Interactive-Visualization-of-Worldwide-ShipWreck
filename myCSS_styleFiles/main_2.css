@@ -2,13 +2,8 @@ text {
     font-size: 16px;
 }
 
-#control-row {
-    padding-bottom: 20px;
-}
-
 .container-fluid {
     padding-left: 40px;
-    padding-right: 40px;
     margin-top: 15px;
 }
 
@@ -27,19 +22,14 @@ h4 {
     margin-top: 4.4px;
 }
 
-
-/* P {
-    text-align: center
-} */
-
 #wrapper {
     width: 960px;
     margin: -30px auto 0;
 }
 
 #map {
-    width: 960px;
-    height: 580px;
+    width: 1000px;
+    height: 500px;
     position: relative;
 }
 
