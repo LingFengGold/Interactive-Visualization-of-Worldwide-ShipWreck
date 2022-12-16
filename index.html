@@ -98,13 +98,43 @@
                 depth in [30,∞), unit: m)</i></p>
         </div>
         <div class="col" style="float:left; width:10%; margin-top: 57px; margin-left:20px;">
-            <div class="row-xs-5 row-md-3">
-                <h4>GP-Quality Type <small><a id="sound" href="#">reset</a></small></h4> <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal2">About the Graph</button>
-                <div class="dc-chart" id="chart-continent-count"></div>
+            <div class="row-xs-5 row-md-3" style="text-align: center;">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <h4>GP-Quality Type <small><a id="sound" href="#">reset</a></small></h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal2">About the Graph</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="dc-chart" id="chart-continent-count"></div>
+                        </td>
+                    </tr> 
+                </table>
             </div>
-            <div class="row-xs-5 row-md-3">
-                <h4>Feature Type <small><a id="feature" href="#">reset</a></small></h4> <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal5">About the Graph</button>
-                <div class="dc-chart" id="chart-cause-count"></div>
+            <div class="row-xs-5 row-md-3" style="text-align: center;">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <h4>Feature Type <small><a id="feature" href="#">reset</a></small></h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal5">About the Graph</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="dc-chart" id="chart-cause-count"></div>
+                        </td>
+                    </tr> 
+                </table>
             </div>
         </div>
         <div class="row">
@@ -244,10 +274,10 @@
                     .elasticX(true)
                     .elasticY(true)
                     .brushOn(false)
-                    .centerBar(true)
-                    .barPadding(0.3)
-                    .outerPadding(1.2)
-                    .gap(30)
+                    // .centerBar(true)
+                    .barPadding(0.2)
+                    .outerPadding(0.2)
+                    // .gap(30)
                     .yAxisLabel('Count')
                     .margins({
                         top: 25,
@@ -259,7 +289,7 @@
                     .renderlet(function (chart) {
                         chart.selectAll("g.x text")
                             // .attr('dx', '-30')
-                            .attr('dx', '-20')
+                            .attr('dx', '-10')
                             .attr('dy', '25')
                             .attr('transform', "rotate(-15)");
                     });
@@ -275,7 +305,7 @@
                     .elasticX(true)
                     .elasticY(true)
                     .brushOn(false)
-                    .centerBar(true)
+                    // .centerBar(true)
                     .yAxisLabel('Count')
                     .margins({
                         top: 25,
@@ -283,14 +313,14 @@
                         bottom: 100,
                         left: 80
                     })
-                    .barPadding(0.3)
-                    .outerPadding(1)
-                    .gap(20)
+                    .barPadding(0.2)
+                    .outerPadding(0.2)
+                    // .gap(20)
                     // because of the x axix label, need to set the bootom margin a large number
                     .renderlet(function (chart) {
                         chart.selectAll("g.x text")
                             // .attr('dx', '-30')
-                            .attr('dx', '-20')
+                            .attr('dx', '-10')
                             .attr('dy', '25')
                             .attr('transform', "rotate(-15)");
                     });
