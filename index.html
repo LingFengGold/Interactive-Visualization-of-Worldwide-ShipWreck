@@ -24,14 +24,14 @@
                     </tr>
                     <tr>
                         <td>
-                            <div class="dc-chart" id="chart-ring-year" style="margin-top: 10px;"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal1">About the Graph</button>
                         </td>
                     </tr> 
+                    <tr>
+                        <td>
+                            <div class="dc-chart" id="chart-ring-year" style="margin-top: 10px;"></div>
+                        </td>
+                    </tr>
                 </table>
             </div>
             <!-- <div class="pie-chart text-center">
@@ -62,19 +62,19 @@
                     </tr>
                     <tr>
                         <td>
-                            <div class="dc-chart" id="chart-ring-season" style="margin-top: 10px;"></div>
+                            <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal3">About the Graph</button>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal3">About the Graph</button>
+                            <div class="dc-chart" id="chart-ring-season" style="margin-top: 10px;"></div>
                         </td>
                     </tr> 
                 </table>
             </div>
         </div>
         <div class="dc-data-count dc-chart text-center" id="data-count" style="float:left; margin-bottom:20px; width: 57%;">
-            <h2><b>Interactive Visualization of Worldwide ShipWreck</b></h2>
+            <h1><b>Interactive Visualization of Worldwide ShipWreck</b></h1>
             <h3>Wrecks Marker Map</h3>
                     <h4 class="text-center">Wrecks
                         <small style="margin-right:10px;">
@@ -88,7 +88,7 @@
                     </h4>
 
             <div class="row text-center" id="control-row">
-                <div class="col-xs-7 text-center" style="width:100%; height: 480px;">
+                <div class="col-xs-7 text-center" style="width:100%; height: 560px;">
                     <div id="map" ></div>
                 </div>   
             </div>
@@ -248,7 +248,7 @@
                 seasonChart
                     .width(320)
                     .height(220)
-                    .ordinalColors(['#88d670', '#ff4e50', '#DBA72E', '#034AA6', '#493F3F'])
+                    .ordinalColors(['#88d670', '#DBA72E', '#ff4e50', '#034AA6', '#493F3F'])
                     .dimension(seasonDim)
                     .group(seasonGroup)
                     .innerRadius(20)
@@ -289,9 +289,12 @@
                     .renderlet(function (chart) {
                         chart.selectAll("g.x text")
                             // .attr('dx', '-30')
-                            .attr('dx', '-10')
-                            .attr('dy', '25')
-                            .attr('transform', "rotate(-15)");
+                            .attr('dx', '-5')
+                            .attr('dy', '15')
+                            .attr('transform', "rotate(-15)")
+                            .html(function(d) {
+                                return d.replace(/,/g, "<br>")
+                            });
                     });
 
                 causeCountBarChart
@@ -320,10 +323,17 @@
                     .renderlet(function (chart) {
                         chart.selectAll("g.x text")
                             // .attr('dx', '-30')
+                            .attr('transform', "rotate(-27)")
+                            .html(function(d) {
+                                var lines = d.split(",");
+                                return lines.map(function(line, i) {
+                                    return "<tspan x='" + (-10*i+1) + "' dy='" + 1.1 + "em'>" + line + "</tspan>";
+                                }).join("");
+                            })
                             .attr('dx', '-10')
-                            .attr('dy', '25')
-                            .attr('transform', "rotate(-15)");
+                            .attr('dy', '45');
                     });
+                
 
                 dataCount
                     .dimension(ndx)
