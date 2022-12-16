@@ -35,7 +35,7 @@
 
 ## 部署情况
 
- &emsp;&emsp;当前项目已部署至<a href="https://lingfenggold.github.io">https://lingfenggold.github.io。</a>
+ &emsp;&emsp;当前项目已部署至<a href="https://lingfenggold.github.io">https://lingfenggold.github.io</a>
 
 ## 数据来源
 
