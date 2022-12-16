@@ -14,734 +14,511 @@
 
 <body>
     <div class="container-fluid">
-        <!-- 1st row - map title  -->
+        <div class="col" id="control-row" style="float:left; width:15%; margin-right: 30px; margin-top: 50px; margin-bottom:20px; height: 30%;">
+            <div class="pie-chart text-center" style="margin-bottom:5px;">
+                <h4>Sunk Year <small><a id="year">reset</a></small>
+                </h4>
+                <div class="dc-chart" id="chart-ring-year"></div>
+                <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal1">About the Graph</button>
+            </div>
+            <div class="pie-chart text-center" style="margin-bottom:5px;">
+                <h4><br>
+                    GP-Quality Type <small><a id="injury" href="#">reset</a></small>
+                </h4>
+                <div class="dc-chart" id="chart-ring-injury"></div>
+                <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal2">About the Graph</button>
+            </div>
+            <div class="pie-chart text-center">
+                <h4><br>Depth <small><a id="season">reset</a></small>
+                </h4>
+                <div class="dc-chart" id="chart-ring-season"></div>
+                <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal3">About the Graph</button>
+            </div>   
+        </div>
+        <div class="dc-data-count dc-chart text-center" id="data-count" style="float:left; margin-bottom:20px; width: 57%;">
+            <h2><b>Interactive Visualization of Worldwide ShipWreck</b></h2>
+            <h3>Wrecks Marker Map</h3>
+                    <h4 class="text-center">Wrecks
+                        <small style="margin-right:10px;">
+                            <span class="filter-count"></span> selected out of <span class="total-count"></span>
+                            records |
+                            <a id="all" href="#">Reset All</a>
+                            </span>
+                        </small>
+                        <button type="button" class="btn btn-default info" data-toggle="modal"
+                            data-target="#myModal">About the project</button>
+                    </h4>
+
+            <div class="row text-center" id="control-row">
+                <div class="col-xs-7 text-center" style="width:100%; height: 480px;">
+                    <div id="map" ></div>
+                </div>   
+            </div>
+            <p><i>(<span style="color:lightgreen">green</span> points: High GP-Quality; <span
+                style="color:darkblue">blue</span>: Med GP-Quality; <span
+                style="color:orange">orange</span>: Low GP-Quality; <span style="color:red">red</span>:
+            Poor GP-Quality; <span style="color: #493F3F">gray</span>: Unknown)</i></p>
+        </div>
+        <div class="col" style="float:left; width:10%; margin-top: 57px; margin-left:20px;">
+            <div class="row-xs-5 row-md-3">
+                <h4>Sound Type <small><a id="sound" href="#">reset</a></small></h4>
+                <div class="dc-chart" id="chart-continent-count"></div>
+            </div>
+            <div class="row-xs-5 row-md-3">
+                <h4>Feature Type <small><a id="feature" href="#">reset</a></small></h4>
+                <div class="dc-chart" id="chart-cause-count"></div>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-xs-12 dc-data-count dc-chart" id="data-count">
-                <h3><b>Interactive Visualization of Worldwide ShipWreck</b></h3>
-
-                <!-- Trigger the modal with a button -->
-
-
-                <!-- 2nd row - subtitle and data count  -->
-                <div class="row">
-                    <div class="col-xs-12 dc-data-count dc-chart" id="data-count">
-                        <h4>Wrecks
-                            <small>
-            <span class="filter-count"></span> selected out of <span class="total-count"></span> records |
-            <a id="all" href="#">Reset All</a>
-            </span>
-            </small>
-                            <button type="button" class="btn btn-default info pull-right" data-toggle="modal" data-target="#myModal">About the project</button>
-                        </h4>
-                    </div>
-                </div>
-                <!-- <div class="row" id="control-row">
-                    <div class="col-xs-2 pie-chart">
-                        <h4>Year <small><a id="year">reset</a></small></h4>
-                        <div class="dc-chart" id="chart-ring-year"></div>
-                    </div>
-                    <div class="col-xs-2 pie-chart">
-                        <h4>Month <small><a id="month" href="#">reset</a></small></h4>
-                        <div class="dc-chart" id="chart-ring-month"></div>
-                    </div>
-                    <div class="col-xs-2 pie-chart">
-                        <h4>Day <small><a id="day">reset</a></small></h4>
-                        <div id="chart-ring-day" class="dc-chart"></div>
-                    </div> -->
-
-                <!-- 3rd row - map -->
-                <div class="row" id="control-row">
-                    <div class="col-xs-8">
-                        <!-- <h4>Wrecks Marker Map
-                            <a href="index_2.html" style="color:black;">| Wrecks Choropleth Map </a>
-                        </h4> -->
-
-                        <h4>
-                            Wrecks Marker Map
-                        </h4>
-
-                        <p><i>(<span style="color:lightgreen">green</span> points: High GP-Quality; <span style="color:darkblue">blue</span>: Med GP-Quality; <span style="color:orange">orange</span>: Low GP-Quality; <span style="color:red">red</span>: Poor GP-Quality; <span style="color: #493F3F">gray</span>: Unknown)</i></p>
-                        <div id="map"></div>
-                    </div>
-                    <div class="col-xs-4 pie-chart">
-                        <h4><br>Depth <small><a id="season">reset</a></small></h4>
-                        <div class="dc-chart" id="chart-ring-season"></div>
-
-                    </div>
-                </div>
-                <!-- 4th row - pie charts and bar charts -->
-                <div class="row" id="control-row">
-                    <div class="col-xs-3 pie-chart">
-                        <h4>Sunk Year <small><a id="year">reset</a></small></h4>
-                        <div class="dc-chart" id="chart-ring-year"></div>
-                    </div>
-                    <div class="col-xs-3 pie-chart">
-                        <h4>GP-Quality Type <small><a id="injury" href="#">reset</a></small></h4>
-                        <div class="dc-chart" id="chart-ring-injury"></div>
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        <h4>Sounding Type <small><a id="sound" href="#">reset</a></small></h4>
-                        <div class="dc-chart" id="chart-continent-count"></div>
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        <h4>Feature Type <small><a id="feature" href="#">reset</a></small></h4>
-                        <div class="dc-chart" id="chart-cause-count"></div>
-                    </div>
-                </div>
-
-
-                <!-- <div class="row">
-                    <div class="col-xs-6 col-md-3">
-                        <div class="dc-chart" id="chart-rating-count"></div>
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        <div class="dc-chart" id="chart-community-rating-count"></div>
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        <div class="dc-chart" id="chart-abv-count"></div>
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        <div class="dc-chart" id="chart-ibu-count"></div>
-                    </div>
-                </div> -->
-
-                <!-- <div class="row">
-                    <div class="col-xs-6 col-md-6">
-                        <div class="dc-chart" id="chart-continent-count"></div>
-                    </div>
-                    <div class="col-xs-6 col-md-6">
-                        <div class="dc-chart" id="chart-cause-count"></div>
-                    </div>
-
-                </div> -->
-
-
-
-                <!-- 5th row - table -->
-                <div class="row">
-                    <div class="col-xs-12">
-                        <table class="table table-bordered table-striped" id="data-table">
-                            <thead>
-                                <tr class="header">
-                                    <th>Vesslterms</th>
-                                    <th>Feature Type</th>
-                                    <th>Latdec</th>
-                                    <th>Londec</th>
-                                    <th>GP_Quality</th>
-                                    <th>Depth</th>
-                                    <th>Sound Type</th>
-                                    <th>Year Sunk</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
+            <div class="col-xs-12">
+                <table class="table table-bordered table-striped" id="data-table">
+                    <thead>
+                        <tr class="header">
+                            <th>Vesslterms</th>
+                            <th>Feature Type</th>
+                            <th>Latdec</th>
+                            <th>Londec</th>
+                            <th>GP_Quality</th>
+                            <th>Depth</th>
+                            <th>Sound Type</th>
+                            <th>Year Sunk</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
+        </div>
 
+        <script type="text/javascript" src="JS_CSS_downloaded_libraries/d3.js"></script>
+        <script type="text/javascript" src="JS_CSS_downloaded_libraries/crossfilter.js"></script>
+        <script type="text/javascript" src="JS_CSS_downloaded_libraries/dc.js"></script>
+        <script type="text/javascript" src="JS_CSS_downloaded_libraries/leaflet.js"></script>
+        <script type="text/javascript" src="JS_CSS_downloaded_libraries/underscore-min.js"></script>
+        <script type="text/javascript" src="JS_CSS_downloaded_libraries/jQuery.js"></script>
+        <script type="text/javascript" src="JS_CSS_downloaded_libraries/Bootstrap.js"></script>
+        <script type="text/javascript">
+            /* instantiate and configure map */
+            var map = L.map('map');
+            var wreckMarkers = new L.FeatureGroup();
+            var OpenStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            });
 
-            <script type="text/javascript" src="JS_CSS_downloaded_libraries/d3.js"></script>
-            <script type="text/javascript" src="JS_CSS_downloaded_libraries/crossfilter.js"></script>
-            <script type="text/javascript" src="JS_CSS_downloaded_libraries/dc.js"></script>
-            <script type="text/javascript" src="JS_CSS_downloaded_libraries/leaflet.js"></script>
-            <script type="text/javascript" src="JS_CSS_downloaded_libraries/underscore-min.js"></script>
-            <script type="text/javascript" src="JS_CSS_downloaded_libraries/jQuery.js"></script>
-            <script type="text/javascript" src="JS_CSS_downloaded_libraries/Bootstrap.js"></script>
-            <script type="text/javascript">
-                /* instantiate and configure map */
-                var map = L.map('map');
-                var wreckMarkers = new L.FeatureGroup();
+            OpenStreetMap.addTo(map);
 
-                // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                //   id: '<your id here>',
-                //   accessToken: '<your token here>',
-                //   maxZoom: 16
-                // } ).addTo(map);
+            d3.csv("data/AWOIS_Wrecks.csv", function (error, data) {
+                var ndx = crossfilter(data);
 
-                // var CyclOSM = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {
-                //     maxZoom: 16,
-                //     attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                // });
-                // CyclOSM.addTo(map);
-
-                var OpenStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-                    maxZoom: 20,
-                    attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                var seasonDim = ndx.dimension(function (d) {
+                    if (d["DEPTH"] == "") return "Unknown";
+                    return d["DEPTH"] >= 20 ? "≥20m" : "<20m";
+                });
+                var yearDim = ndx.dimension(function (d) {
+                    if (d["YEARSUNK"] == "") return "Unknown";
+                    return "Known"
+                });
+                var injuryDim = ndx.dimension(function (d) {
+                    return d["GP_QUALITY"];
+                });
+                var continentDim = ndx.dimension(function (d) {
+                    return d["SOUNDING_TYPE"];
+                });
+                var causeDim = ndx.dimension(function (d) {
+                    return d["FEATURE_TYPE"];
+                });
+                var allDim = ndx.dimension(function (d) {
+                    return d;
                 });
 
-                OpenStreetMap.addTo(map);
+                var all = ndx.groupAll();
+                var seasonGroup = seasonDim.group().reduceCount(),
+                    injuryGroup = injuryDim.group().reduceCount(),
+                    continentGroup = continentDim.group().reduceCount(),
+                    yearGroup = yearDim.group().reduceCount(),
+                    causeGroup = causeDim.group().reduceCount();
 
-                /* Parse JSON file, create charts, draw markers on map */
-                // d3.json('untappd.json', function(error, data) {
+                var seasonChart = dc.pieChart('#chart-ring-season'),
+                    yearChart = dc.pieChart('#chart-ring-year'),
+                    injuryChart = dc.pieChart('#chart-ring-injury'),
+                    continentCountBarChart = dc.barChart('#chart-continent-count'),
+                    causeCountBarChart = dc.barChart('#chart-cause-count'),
+                    dataCount = dc.dataCount('#data-count'),
+                    dataTable = dc.dataTable('#data-table');
 
-                /* Parse csv file, create charts, draw markers on map */
-                d3.csv("data/AWOIS_Wrecks.csv", function(error, data) {
-                    // var beerData = data.response.beers.items;
+                injuryChart
+                    .width(220)
+                    .height(120)
+                    .ordinalColors(['lightgreen', 'orange', 'darkblue', 'red'])
+                    .dimension(injuryDim)
+                    .group(injuryGroup)
+                    .innerRadius(20)
 
-                    // var fullDateFormat = d3.time.format('%a, %d %b %Y %X %Z');
-                    // var yearFormat = d3.time.format('%Y');
-                    // var monthFormat = d3.time.format('%b');
-                    // var dayOfWeekFormat = d3.time.format('%a');
-
-                    // normalize/parse data so dc can correctly sort & bin them
-                    // I like to think of each "d" as a row in a spreadsheet
-
-                    // _.each(beerData, function(d) {
-                    //     d.count = +d.count;
-                    //     // round to nearest 0.25
-                    //     d.rating_score = Math.round(+d.rating_score * 4) / 4;
-                    //     d.beer.rating_score = Math.round(+d.beer.rating_score * 4) / 4;
-                    //     // round to nearest 0.5
-                    //     d.beer.beer_abv = Math.round(+d.beer.beer_abv * 2) / 2;
-                    //     // round to nearest 10
-                    //     d.beer.beer_ibu = Math.floor(+d.beer.beer_ibu / 10) * 10;
-
-                    //     d.first_had_dt = fullDateFormat.parse(d.first_had);
-                    //     d.first_had_year = +yearFormat(d.first_had_dt);
-                    //     d.first_had_month = monthFormat(d.first_had_dt);
-                    //     d.first_had_day = dayOfWeekFormat(d.first_had_dt);
-                    // });
-
-                    // set crossfilter
-                    // var ndx = crossfilter(beerData);
-                    var ndx = crossfilter(data);
-
-                    // create dimensions (x-axis values)
-                    // var yearDim = ndx.dimension(function(d) {
-                    //         return d.first_had_year;
-                    //     }),
-
-                    var seasonDim = ndx.dimension(function(d) {
-                        if(d["DEPTH"] == "") return "Unknown";
-                        return d["DEPTH"] >= 20 ? "≥20m" : "<20m";
-                    });
-                    var yearDim = ndx.dimension(function(d) {
-                        if(d["YEARSUNK"] == "") return "Unknown";
-                        return "Known"
-                    });
-                    var injuryDim = ndx.dimension(function(d) {
-                        return d["GP_QUALITY"];
-                    });
-                    var continentDim = ndx.dimension(function(d) {
-                        return d["SOUNDING_TYPE"];
-                    });
-                    var causeDim = ndx.dimension(function(d) {
-                        return d["FEATURE_TYPE"];
-                    });
-                    var allDim = ndx.dimension(function(d) {
-                        return d;
+                yearChart
+                    .width(220)
+                    .height(120)
+                    .ordinalColors(['#88d670', '#ff4e50'])
+                    .dimension(yearDim)
+                    .group(yearGroup)
+                    .innerRadius(20)
+                    .ordering(function (d) {
+                        var order = {
+                            'Known': 1,
+                            'Unknown': 2
+                        };
+                        return order[d.key];
                     });
 
-                    // dc.pluck: short-hand for same kind of anon. function we used for yearDim
-                    // monthDim = ndx.dimension(dc.pluck('first_had_month')),
-                    // dayOfWeekDim = ndx.dimension(dc.pluck('first_had_day')),
-                    // ratingDim = ndx.dimension(dc.pluck('rating_score')),
-                    // commRatingDim = ndx.dimension(function(d) {
-                    //     return d.beer.rating_score;
-                    // }),
-                    // abvDim = ndx.dimension(function(d) {
-                    //     return d.beer.beer_abv;
-                    // }),
-                    // ibuDim = ndx.dimension(function(d) {
-                    //     return d.beer.beer_ibu;
-                    // }),
-                    // allDim = ndx.dimension(function(d) {
-                    //     return d;
-                    // });
+                seasonChart
+                    .width(220)
+                    .height(120)
+                    .ordinalColors(['#88d670', '#ff4e50', '#DBA72E', '#034AA6', '#493F3F'])
+                    .dimension(seasonDim)
+                    .group(seasonGroup)
+                    .innerRadius(20)
+                    .ordering(function (d) {
+                        var order = {
+                            'spring': 1,
+                            'summer': 2,
+                            'fall': 3,
+                            'winter': 4,
+                            'unknown': 5,
+                        };
+                        return order[d.key];
+                    });
 
-                    // create groups (y-axis values)
+                continentCountBarChart
+                    .width(350)
+                    .height(300)
+                    .dimension(continentDim)
+                    .group(continentGroup)
+                    .x(d3.scale.ordinal().domain(
+                        continentDim)) //d3.scale.ordinal().domain(genusDim) //d3.scaleBand() for d3 v4
+                    .xUnits(dc.units.ordinal)
+                    .elasticX(true)
+                    .elasticY(true)
+                    .brushOn(false)
+                    .centerBar(true)
+                    .barPadding(0.3)
+                    .outerPadding(1.2)
+                    .gap(30)
+                    .yAxisLabel('Count')
+                    .margins({
+                        top: 25,
+                        right: 20,
+                        bottom: 100,
+                        left: 80
+                    })
+                    // because of the x axix label, need to set the bootom margin a large number
+                    .renderlet(function (chart) {
+                        chart.selectAll("g.x text")
+                            // .attr('dx', '-30')
+                            .attr('dx', '-20')
+                            .attr('dy', '25')
+                            .attr('transform', "rotate(-15)");
+                    });
 
-                    var all = ndx.groupAll();
-                    // var countPerYear = yearDim.group().reduceCount(),
-                    //     countPerMonth = monthDim.group().reduceCount(),
-                    //     countPerDay = dayOfWeekDim.group().reduceCount(),
-                    //     countPerRating = ratingDim.group().reduceCount(),
-                    //     countPerCommRating = commRatingDim.group().reduceCount(),
-                    //     countPerABV = abvDim.group().reduceCount(),
-                    //     countPerIBU = ibuDim.group().reduceCount();
+                causeCountBarChart
+                    .width(350)
+                    .height(300)
+                    .dimension(causeDim)
+                    .group(causeGroup)
+                    .x(d3.scale.ordinal().domain(
+                        causeDim)) //d3.scale.ordinal().domain(genusDim) //d3.scaleBand() for d3 v4
+                    .xUnits(dc.units.ordinal)
+                    .elasticX(true)
+                    .elasticY(true)
+                    .brushOn(false)
+                    .centerBar(true)
+                    .yAxisLabel('Count')
+                    .margins({
+                        top: 25,
+                        right: 20,
+                        bottom: 100,
+                        left: 80
+                    })
+                    .barPadding(0.3)
+                    .outerPadding(1)
+                    .gap(20)
+                    // because of the x axix label, need to set the bootom margin a large number
+                    .renderlet(function (chart) {
+                        chart.selectAll("g.x text")
+                            // .attr('dx', '-30')
+                            .attr('dx', '-20')
+                            .attr('dy', '25')
+                            .attr('transform', "rotate(-15)");
+                    });
 
-                    var seasonGroup = seasonDim.group().reduceCount(),
-                        injuryGroup = injuryDim.group().reduceCount(),
-                        continentGroup = continentDim.group().reduceCount(),
-                        yearGroup = yearDim.group().reduceCount(),
-                        causeGroup = causeDim.group().reduceCount();
+                dataCount
+                    .dimension(ndx)
+                    .group(all);
 
-                    // specify charts
-                    // This is where the chart variable is defined.
-                    var seasonChart = dc.pieChart('#chart-ring-season'),
-                        yearChart = dc.pieChart('#chart-ring-year'),
-                        injuryChart = dc.pieChart('#chart-ring-injury'),
-                        // dayChart = dc.pieChart('#chart-ring-day'),
-                        // ratingCountChart = dc.barChart('#chart-rating-count'),
-                        // commRatingCountChart = dc.barChart('#chart-community-rating-count'),
-                        continentCountBarChart = dc.barChart('#chart-continent-count'),
-                        causeCountBarChart = dc.barChart('#chart-cause-count'),
-                        dataCount = dc.dataCount('#data-count'),
-                        dataTable = dc.dataTable('#data-table');
+                // This is where you can adjust the columns of the fields in the tale.
+                dataTable
+                    .dimension(allDim)
+                    .group(function (d) {
+                        return 'dc.js insists on putting a row here so I remove it using JS';
+                    })
+                    .size(100)
+                    .columns([
+                        function (d) {
+                            return d["VESSLTERMS"];
+                        },
+                        function (d) {
+                            return d["FEATURE_TYPE"];
+                        },
+                        function (d) {
+                            return d["LATDEC"];
+                        },
+                        function (d) {
+                            return d["LONDEC"];
+                        },
+                        function (d) {
+                            return d["GP_QUALITY"];
+                        },
+                        function (d) {
+                            return d["DEPTH"];
+                        },
+                        function (d) {
+                            return d["SOUNDING_TYPE"];
+                        },
+                        function (d) {
+                            return d["YEARSUNK"];
+                        },
 
-                    // This is where you define the code for each chart variable.
-                    // yearChart
-                    //     .width(150)
-                    //     .height(150)
-                    //     .dimension(yearDim)
-                    //     .group(countPerYear)
-                    //     .innerRadius(20);
-                    injuryChart
-                        .width(280)
-                        .height(320)
-                        .ordinalColors(['lightgreen', 'orange', 'darkblue', 'red'])
-                        .dimension(injuryDim)
-                        .group(injuryGroup)
-                        .innerRadius(20)
-                        
-                    yearChart
-                        .width(280)
-                        .height(320)
-                        .ordinalColors(['#88d670', '#ff4e50'])
-                        .dimension(yearDim)
-                        .group(yearGroup)
-                        .innerRadius(20)
-                        .ordering(function(d) {
-                            var order = {
-                                'Known': 1,
-                                'Unknown': 2
-                            };
-                            return order[d.key];
-                        });
+                    ])
+                    // This is the place to sort the data table, choose one of the table columns.
+                    .sortBy(dc.pluck('country_captalized'))
+                    .order(d3.descending)
+                    .on('renderlet', function (table) {
+                        // each time table is rendered remove nasty extra row dc.js insists on adding
+                        table.select('tr.dc-table-group').remove();
 
-                    // monthChart
-                    //     .width(150)
-                    //     .height(150)
-                    //     .dimension(monthDim)
-                    //     .group(countPerMonth)
-                    //     .innerRadius(20)
-                    //     .ordering(function(d) {
-                    //         var order = {
-                    //             'Jan': 1,
-                    //             'Feb': 2,
-                    //             'Mar': 3,
-                    //             'Apr': 4,
-                    //             'May': 5,
-                    //             'Jun': 6,
-                    //             'Jul': 7,
-                    //             'Aug': 8,
-                    //             'Sep': 9,
-                    //             'Oct': 10,
-                    //             'Nov': 11,
-                    //             'Dec': 12
-                    //         };
-                    //         return order[d.key];
-                    //     });
-                    seasonChart
-                        .width(300)
-                        .height(340)
-                        .ordinalColors(['#88d670', '#ff4e50', '#DBA72E', '#034AA6', '#493F3F'])
-                        .dimension(seasonDim)
-                        .group(seasonGroup)
-                        .innerRadius(20)
-                        .ordering(function(d) {
-                            var order = {
-                                'spring': 1,
-                                'summer': 2,
-                                'fall': 3,
-                                'winter': 4,
-                                'unknown': 5,
-                            };
-                            return order[d.key];
-                        });
-                    
+                        // update map with Wrecks to match filtered data
+                        wreckMarkers.clearLayers();
+                        _.each(allDim.top(Infinity), function (d) {
+                            var longitude = d["LONDEC"];
+                            var latitude = d["LATDEC"];
+                            var vessel = d["VESSLTERMS"];
+                            var depth = d["DEPTH"];
+                            var location = d["location"];
+                            var year = d["YEARSUNK"];
+                            var link = d["href_formula"];
+                            var gp_quality = d["GP_QUALITY"];
+                            var history = d["HISTORY"];
 
+                            var fillColor_Var = "";
 
-                    // dayChart
-                    //     .width(150)
-                    //     .height(150)
-                    //     .dimension(dayOfWeekDim)
-                    //     .group(countPerDay)
-                    //     .innerRadius(20)
-                    //     .ordering(function(d) {
-                    //         var order = {
-                    //             'Mon': 0,
-                    //             'Tue': 1,
-                    //             'Wed': 2,
-                    //             'Thu': 3,
-                    //             'Fri': 4,
-                    //             'Sat': 5,
-                    //             'Sun': 6
-                    //         }
-                    //         return order[d.key];
-                    //     });
+                            if (gp_quality == "Poor") {
+                                fillColor_Var = "red";
+                            } else if (gp_quality == "Low") {
+                                fillColor_Var = "orange";
+                            } else if (gp_quality == "High") {
+                                fillColor_Var = "lightgreen";
+                            } else if (gp_quality == "Med") {
+                                fillColor_Var = "darkblue";
+                            } else {
+                                fillColor_Var = "#493F3F"
+                            }
 
-                    // ratingCountChart
-                    //     .width(300)
-                    //     .height(180)
-                    //     .dimension(ratingDim)
-                    //     .group(countPerRating)
-                    //     .x(d3.scale.linear().domain([0, 5.2]))
-                    //     .elasticY(true)
-                    //     .centerBar(true)
-                    //     .barPadding(5)
-                    //     .xAxisLabel('My rating')
-                    //     .yAxisLabel('Count')
-                    //     .margins({
-                    //         top: 10,
-                    //         right: 20,
-                    //         bottom: 50,
-                    //         left: 50
-                    //     });
-                    // ratingCountChart.xAxis().tickValues([0, 1, 2, 3, 4, 5]);
-
-                    // commRatingCountChart
-                    //     .width(300)
-                    //     .height(180)
-                    //     .dimension(commRatingDim)
-                    //     .group(countPerCommRating)
-                    //     .x(d3.scale.linear().domain([0, 5.2]))
-                    //     .elasticY(true)
-                    //     .centerBar(true)
-                    //     .barPadding(5)
-                    //     .xAxisLabel('Community rating')
-                    //     .yAxisLabel('Count')
-                    //     .margins({
-                    //         top: 10,
-                    //         right: 20,
-                    //         bottom: 50,
-                    //         left: 50
-                    //     });
-                    // commRatingCountChart.xAxis().tickValues([0, 1, 2, 3, 4, 5]);
-
-                    // abvCountChart
-                    //     .width(300)
-                    //     .height(180)
-                    //     .dimension(abvDim)
-                    //     .group(countPerABV)
-                    //     .x(d3.scale.linear().domain([-0.2, d3.max(beerData, function(d) {
-                    //         return d.beer.beer_abv;
-                    //     }) + 0.2]))
-                    //     .elasticY(true)
-                    //     .centerBar(true)
-                    //     .barPadding(2)
-                    //     .xAxisLabel('Alcohol By Volume (%)')
-                    //     .yAxisLabel('Count')
-                    //     .margins({
-                    //         top: 10,
-                    //         right: 20,
-                    //         bottom: 50,
-                    //         left: 50
-                    //     });
-
-                    // ibuCountChart
-                    //     .width(300)
-                    //     .height(180)
-                    //     .dimension(ibuDim)
-                    //     .group(countPerIBU)
-                    //     .x(d3.scale.linear().domain([-2, d3.max(beerData, function(d) {
-                    //         return d.beer.beer_ibu;
-                    //     }) + 2]))
-                    //     .elasticY(true)
-                    //     .centerBar(true)
-                    //     .barPadding(5)
-                    //     .xAxisLabel('International Bitterness Units')
-                    //     .yAxisLabel('Count')
-                    //     .xUnits(function(d) {
-                    //         return 5;
-                    //     })
-                    //     .margins({
-                    //         top: 10,
-                    //         right: 20,
-                    //         bottom: 50,
-                    //         left: 50
-                    //     });
-
-                    continentCountBarChart
-                        .width(400)
-                        .height(350)
-                        .dimension(continentDim)
-                        .group(continentGroup)
-                        .x(d3.scale.ordinal().domain(continentDim)) //d3.scale.ordinal().domain(genusDim) //d3.scaleBand() for d3 v4
-                        .xUnits(dc.units.ordinal)
-                        .elasticX(true)
-                        .elasticY(true)
-                        .brushOn(false)
-                        .centerBar(true)
-                        .barPadding(0.3)
-                        .outerPadding(1.2)
-                        .gap(30)
-                        // .xAxisLabel('Continent')
-                        .yAxisLabel('Count')
-                        .margins({
-                            top: 25,
-                            right: 20,
-                            bottom: 100,
-                            left: 80
-                        })
-                        // because of the x axix label, need to set the bootom margin a large number
-                        .renderlet(function(chart) {
-                            chart.selectAll("g.x text")
-                                // .attr('dx', '-30')
-                                .attr('dx', '-20')
-                                .attr('dy', '25')
-                                .attr('transform', "rotate(-15)");
-                        });
-                    // continentCountBarChart.xAxis().tickValues(continentDim);
-
-                    causeCountBarChart
-                        .width(400)
-                        .height(350)
-                        .dimension(causeDim)
-                        .group(causeGroup)
-                        .x(d3.scale.ordinal().domain(causeDim)) //d3.scale.ordinal().domain(genusDim) //d3.scaleBand() for d3 v4
-                        .xUnits(dc.units.ordinal)
-                        .elasticX(true)
-                        .elasticY(true)
-                        .brushOn(false)
-                        .centerBar(true)
-                        // .xAxisLabel('Injury Cause')
-                        .yAxisLabel('Count')
-                        .margins({
-                            top: 25,
-                            right: 20,
-                            bottom: 100,
-                            left: 80
-                        })
-                        .barPadding(0.3)
-                        .outerPadding(1)
-                        .gap(20)
-                        // because of the x axix label, need to set the bootom margin a large number
-                        .renderlet(function(chart) {
-                            chart.selectAll("g.x text")
-                                // .attr('dx', '-30')
-                                .attr('dx', '-20')
-                                .attr('dy', '25')
-                                .attr('transform', "rotate(-15)");
-                        });
-                    // causeCountBarChart.xAxis().tickValues(d3.range(d["cause"].length()));
-
-                    dataCount
-                        .dimension(ndx)
-                        .group(all);
-
-                    // This is where you can adjust the columns of the fields in the tale.
-                    dataTable
-                        .dimension(allDim)
-                        .group(function(d) {
-                            return 'dc.js insists on putting a row here so I remove it using JS';
-                        })
-                        .size(100)
-                        .columns([
-                            function(d) {
-                                return d["VESSLTERMS"];
-                            },
-                            function(d) {
-                                return d["FEATURE_TYPE"];
-                            },
-                            function(d) {
-                                return d["LATDEC"];
-                            },
-                            function(d) {
-                                return d["LONDEC"];
-                            },
-                            function(d) {
-                                return d["GP_QUALITY"];
-                            },
-                            function(d) {
-                                return d["DEPTH"];
-                            },
-                            function(d) {
-                                return d["SOUNDING_TYPE"];
-                            },
-                            function(d) {
-                                return d["YEARSUNK"];
-                            },
-
-                        ])
-                        // This is the place to sort the data table, choose one of the table columns.
-                        .sortBy(dc.pluck('country_captalized'))
-                        .order(d3.descending)
-                        .on('renderlet', function(table) {
-                            // each time table is rendered remove nasty extra row dc.js insists on adding
-                            table.select('tr.dc-table-group').remove();
-
-                            // update map with Wrecks to match filtered data
-                            wreckMarkers.clearLayers();
-                            _.each(allDim.top(Infinity), function(d) {
-                                // var loc = d.brewery.location;
-                                // this is the code for the geospatial Long/Lat
-                                var longitude = d["LONDEC"];
-                                var latitude = d["LATDEC"];
-                                var vessel = d["VESSLTERMS"];
-                                var depth = d["DEPTH"];
-                                var location = d["location"];
-                                var year = d["YEARSUNK"];
-                                var link = d["href_formula"];
-                                var gp_quality = d["GP_QUALITY"];
-                                var history = d["HISTORY"];
-                                // var marker = L.marker([loc.lat, loc.lng]);
-                                // var marker = L.marker([latitude, longitude]);
-                                // var geojsonMarkerOptions = {
-                                //     radius: 8,
-                                //     fillColor: "purple",
-                                //     color: "purple",
-                                //     weight: 1,
-                                //     opacity: 1,
-                                //     fillOpacity: 0.8
-                                // };
-                                // var marker = L.marker([latitude, longitude], geojsonMarkerOptions);
-                                // var marker = L.marker([latitude, longitude], ge ojsonMarkerOptions);
-
-                                var fillColor_Var = "";
-
-                                // if (Number(feature.properties.District) == 1) {
-                                //   fillColor_Var = "blue";
-                                // } else if (Number(feature.properties.District) == 2) {
-                                //   fillColor_Var = "red";
-                                // } else {
-                                //   fillColor_Var = "yellow";
-                                // }
-
-                                if (gp_quality == "Poor") {
-                                    fillColor_Var = "red";
-                                } else if (gp_quality == "Low") {
-                                    fillColor_Var = "orange";
-                                } else if (gp_quality == "High"){
-                                    fillColor_Var = "lightgreen";
-                                } else if (gp_quality == "Med"){
-                                    fillColor_Var = "darkblue";
-                                } else {
-                                    fillColor_Var = "#493F3F"
-                                }
-
-                                var marker = L.circleMarker([latitude, longitude], {
-                                    radius: 5,
-                                    fillColor: fillColor_Var,
-                                    color: "gray",
-                                    weight: 1,
-                                    opacity: 1,
-                                    fillOpacity: 0.8
-                                });
-
-
-                                // marker.bindPopup("<p>" + name + " " + loc.brewery_city + " " + loc.brewery_state + "</p>");
-                                marker.bindPopup("<b> Vesselterm: </b>" + vessel + "<br>" +
-                                    "<b> Depth: </b>" + depth + "<br>" +
-                                    "<b> Location: </b>" + '(' + longitude + ',' + latitude + ')' + "<br>" +
-                                    "<b> Sunk Year: </b>" + year + "<br>" +
-                                    "<b> GP Quality: </b>" + gp_quality + "<br>" +
-                                    "<b> History: </b>" + history + "<br>" +
-                                    // "Link: " + link + "<br>");;
-                                    "<b> Link: </b>" + '<a href= "' + link + '" target="_blank">' + "View Report" + "</a>" + "<br>");;
-                                wreckMarkers.addLayer(marker);
+                            var marker = L.circleMarker([latitude, longitude], {
+                                radius: 5,
+                                fillColor: fillColor_Var,
+                                color: "gray",
+                                weight: 1,
+                                opacity: 1,
+                                fillOpacity: 0.8
                             });
-                            map.addLayer(wreckMarkers);
-                            map.fitBounds(wreckMarkers.getBounds());
+
+                            marker.bindPopup("<b> Vesselterm: </b>" + vessel + "<br>" +
+                                "<b> Depth: </b>" + depth + "<br>" +
+                                "<b> Location: </b>" + '(' + longitude + ',' + latitude +
+                                ')' + "<br>" +
+                                "<b> Sunk Year: </b>" + year + "<br>" +
+                                "<b> GP Quality: </b>" + gp_quality + "<br>" +
+                                "<b> History: </b>" + history + "<br>" +
+                                "<b> Link: </b>" + '<a href= "' + link +
+                                '" target="_blank">' + "View Report" + "</a>" + "<br>");;
+                            wreckMarkers.addLayer(marker);
                         });
-
-                    // register handlers
-                    d3.selectAll('a#all').on('click', function() {
-                        dc.filterAll();
-                        dc.renderAll();
+                        map.addLayer(wreckMarkers);
+                        map.fitBounds(wreckMarkers.getBounds());
                     });
 
-                    // d3.selectAll('a#year').on('click', function() {
-                    //     yearChart.filterAll();
-                    //     dc.redrawAll();
-                    // });
-
-                    // d3.selectAll('a#month').on('click', function() {
-                    //     monthChart.filterAll();
-                    //     dc.redrawAll();
-                    // });
-
-                    // d3.selectAll('a#day').on('click', function() {
-                    //     dayChart.filterAll();
-                    //     dc.redrawAll();
-                    // });
-
-                    d3.selectAll('a#season').on('click', function() {
-                        seasonChart.filterAll();
-                        dc.redrawAll();
-                    });
-
-                    d3.selectAll('a#year').on('click', function() {
-                        yearChart.filterAll();
-                        dc.redrawAll();
-                    });
-
-                    d3.selectAll('a#injury').on('click', function() {
-                        injuryChart.filterAll();
-                        dc.redrawAll();
-                    });
-
-                    d3.selectAll('a#sound').on('click', function() {
-                        continentCountBarChart.filterAll();
-                        dc.redrawAll();
-                    });
-
-                    d3.selectAll('a#feature').on('click', function() {
-                        causeCountBarChart.filterAll();
-                        dc.redrawAll();
-                    });
-
-                    // showtime!
+                // register handlers
+                d3.selectAll('a#all').on('click', function () {
+                    dc.filterAll();
                     dc.renderAll();
-
                 });
-            </script>
 
-            <!-- Model code begin -->
+                d3.selectAll('a#season').on('click', function () {
+                    seasonChart.filterAll();
+                    dc.redrawAll();
+                });
 
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
+                d3.selectAll('a#year').on('click', function () {
+                    yearChart.filterAll();
+                    dc.redrawAll();
+                });
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">About Info for Worldwide Wrecks Web Map App</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p><strong>About the Project:</strong> Wrecks are global traumatic events that generate social and economic costs. Wrecks on human beings leading to various types of injuries and even death in some cases is not uncommon.
-                                Improved understanding of Wrecks risks may help to inform wreck management strategies, help human beings to better understand risk factors leading to such attacks and ultimately help to improve human safety, and
-                                wreck conservation.
-                                <p>
-                                    <p>This project aims to interactively visualize Wrecks cases across the globe by developing an interactive web application using the data collected by Global Wreck File. This project will apply visual analytics
-                                        techniques to effectively demonstrate Wrecks over time in a more dynamic and interactive way.</p>
-                                    <p>The original global Wreck data was collected and provided by the Global Wreck File. Global Wreck File is a global dataset of Wrecks, which contains information on over 6,300 Wrecks,
-                                        and includes detailed, often privileged, information including reports and photos. The global Wreck data used in this project was downloaded from Kaggle.
-                                    </p>
-                                    <p><a href="https://www.youtube.com/watch?v=msUhvIH7XXw" target="_blank"><i>(web app demo video)</i></a></p>
-                                    <strong>About the People:</strong>
+                d3.selectAll('a#injury').on('click', function () {
+                    injuryChart.filterAll();
+                    dc.redrawAll();
+                });
 
-                                    <p>Project advisor: <a href="https://www.lipingyang.org" target="_blank">Dr. Liping Yang</a> (Course Instructor for GEOG 485L/585L - Internet Mapping)</p>
+                d3.selectAll('a#sound').on('click', function () {
+                    continentCountBarChart.filterAll();
+                    dc.redrawAll();
+                });
 
-                                    <p>Web app developer: <a href="https://sarigai-geoair.github.io/" target="_blank">Sarigai Sarigai</a> (sarigaigis@gmail.com)
-                                    </p>
+                d3.selectAll('a#feature').on('click', function () {
+                    causeCountBarChart.filterAll();
+                    dc.redrawAll();
+                });
 
-                                    <strong>Data source:</strong>
+                // showtime!
+                dc.renderAll();
 
-                                    <p> <a href="http://www.wreckattackfile.net/index.htm" target="_blank">Global Wreck File </a></p>
+            });
+        </script>
 
-                                    <p><a href="https://www.kaggle.com/teajay/global-wreck-attacks" target="_blank">Kaggle - Global Wrecks </a></p>
+        <!-- Model code begin -->
 
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
 
-                                    <strong>Acknowledgements:</strong>
-                                    <p><a href="https://github.com/austinlyons/dcjs-leaflet-untappd" target="_blank">Tutorial - Beer Drinking Data Vizualization</a></p>
-
-                                    <p>
-                                        <a href="http://bl.ocks.org/rgdonohue/9280446" target="_blank">Tutorial - Animated Choropleth Map </a>
-                                    </p>
-
-                                </p>
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">About Info for Worldwide Wrecks Web Map App</h4>
                     </div>
-
+                    <div class="modal-body">
+                        <h1>SDU Visualization</h1>
+                        <h2>项目背景介绍</h2>
+                        <p>
+                            2022年7月2日，广东阳江海域发生了一起沉船事故。海上风电场项目施工浮吊船“福景001”轮在广东阳江附近海域防台锚地避3号台风“暹芭”时发生意外，锚链断裂、走锚遇险，20多条鲜活的生命就这样离我们而去。无独有偶，近几十年来，随着海洋工业的发展，世界上的沉船事故屡有发生。不同与人类的主场陆地，沉船事件发生时，深邃的海洋使人们的自救和政府的搜救变得十分困难，因此总会造成十分严重的灾难。<br>
+                            我们小组了解了近年来的沉船事件后，决定使用历年来的沉船数据，制作一个Dashboard，整合归纳多年来的数据。世事无常，人生在世，我们永远无法预料意外和明天究竟哪一个会先到，很多意外的发生往往不会给人留下丝毫反应的机会，前一刻还在一起说笑的两个人，瞬间就可能会阴阳两隔。希望我们制作的项目能够对相关行业提供一定的帮助。。。。。。。
+                        </p>
+                        <h2>功能</h2>
+                        <ul>
+                            <li>提供可缩放、可移动的地图模块</li>
+                            <li>提供详细数据</li>
+                            <li>提供多种可交互可视化</li>
+                        </ul>
+                        <h2>可实现问题</h2>
+                        <ul>
+                            <li>哪些季节容易发生事故？</li>
+                            <li>不同的地方容易发生什么类型的事故？</li>
+                            <li>哪些地方是事故高发地？</li>
+                            <li>在有原因的事故中，沉船时发生的活动是什么？</li>
+                            <li>发生事故时水的深度，地点和事故类型的关系是什么？</li>
+                        </ul>
+                        <h2>项目意义</h2>
+                        <p>使用沉船数据可以帮助我们了解沉船事件的发生情况，比如事件发生的频率、影响因素等。这有助于我们分析事故原因，并采取相应措施来预防类似事件的发生。沉船数据的分析也有助于我们了解沉船事件对海洋生态、海事交通以及经济等方面的影响，为相关部门制定政策和决策提供依据。
+                        </p>
+                        <h2>项目部署</h2>
+                        <p>当前项目已部署至github.io</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-            </div>
-            <!-- Model compoent end  -->
 
+            </div>
+        </div>
+
+        <div class="modal fade1" id="myModal1" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Sunk Year</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h1>SDU Visualization</h1>
+                        <h2>项目背景介绍</h2>
+                        <p>
+                            广东阳江海域发生了一起沉船事故。海上风电场项目施工浮吊船“福景001”轮在广东阳江附近海域防台锚地避3号台风“暹芭”时发生意外，锚链断裂、走锚遇险，20多条鲜活的生命就这样离我们而去。无独有偶，近几十年来，随着海洋工业的发展，世界上的沉船事故屡有发生。不同与人类的主场陆地，沉船事件发生时，深邃的海洋使人们的自救和政府的搜救变得十分困难，因此总会造成十分严重的灾难。<br>
+                            我们小组了解了近年来的沉船事件后，决定使用历年来的沉船数据，制作一个Dashboard，整合归纳多年来的数据。世事无常，人生在世，我们永远无法预料意外和明天究竟哪一个会先到，很多意外的发生往往不会给人留下丝毫反应的机会，前一刻还在一起说笑的两个人，瞬间就可能会阴阳两隔。希望我们制作的项目能够对相关行业提供一定的帮助。。。。。。。
+                        </p>
+                        <h2>功能</h2>
+                        <ul>
+                            <li>提供可缩放、可移动的地图模块</li>
+                            <li>提供详细数据</li>
+                            <li>提供多种可交互可视化</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal2" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">GP Quality</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h1>SDU Visualization</h1>
+                        <h2>项目背景介绍</h2>
+                        <p>
+                            2022年7月2日，广东阳江海域发生了一起沉船事故。海上风电场项目施工浮吊船“福景001”轮在广东阳江附近海域防台锚地避3号台风“暹芭”时发生意外，锚链断裂、走锚遇险，20多条鲜活的生命就这样离我们而去。无独有偶，近几十年来，随着海洋工业的发展，世界上的沉船事故屡有发生。不同与人类的主场陆地，沉船事件发生时，深邃的海洋使人们的自救和政府的搜救变得十分困难，因此总会造成十分严重的灾难。<br>
+                        </p>
+                        <h2>功能</h2>
+                        <ul>
+                            <li>提供可缩放、可移动的地图模块</li>
+                            <li>提供详细数据</li>
+                            <li>提供多种可交互可视化</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal3" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">GP Quality</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h1>SDU Visualization</h1>
+                        <h2>项目背景介绍</h2>
+                        <p>
+                            2022年7月2日，广东阳江海域发生了一起沉船事故。海上风电场项目施工浮吊船“福景001”轮在广东阳江附近海域防台锚地避3号台风“暹芭”时发生意外，锚链断裂、走锚遇险，20多条鲜活的生命就这样离我们而去。无独有偶，近几十年来，随着海洋工业的发展，世界上的沉船事故屡有发生。不同与人类的主场陆地，沉船事件发生时，深邃的海洋使人们的自救和政府的搜救变得十分困难，因此总会造成十分严重的灾难。<br>
+                        </p>
+                        <h2>功能</h2>
+                        <ul>
+                            <li>提供可缩放、可移动的地图模块</li>
+                            <li>提供详细数据</li>
+                            <li>提供多种可交互可视化</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Model compoent end  -->
 </body>
 
 </html>

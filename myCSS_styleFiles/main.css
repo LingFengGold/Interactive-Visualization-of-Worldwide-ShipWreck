@@ -10,7 +10,7 @@
 }
 
 .pie-chart {
-    height: 150px;
+    margin-bottom: 40px;
 }
 
 .dc-chart .axis text {
@@ -22,14 +22,14 @@ text {
 }
 
 #map {
-    height: 350px;
-    width: 750px;
-}
-
-#control-row {
-    padding-bottom: 20px;
+    height: 100%;
+    width: 100%;
 }
 
 a {
     cursor: pointer
+}
+
+#data-count {
+    width: 70%;
 }
