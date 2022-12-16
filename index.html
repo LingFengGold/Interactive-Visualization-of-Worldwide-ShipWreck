@@ -15,25 +15,63 @@
 <body>
     <div class="container-fluid">
         <div class="col" id="control-row" style="float:left; width:15%; margin-right: 30px; margin-top: 50px; margin-bottom:20px; height: 30%;">
-            <div class="pie-chart text-center" style="margin-bottom:5px;">
-                <h4>Sunk Year <small><a id="year">reset</a></small>
-                </h4>
-                <div class="dc-chart" id="chart-ring-year"></div>
-                <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal1">About the Graph</button>
-            </div>
-            <div class="pie-chart text-center" style="margin-bottom:5px;">
-                <h4><br>
-                    GP-Quality Type <small><a id="injury" href="#">reset</a></small>
-                </h4>
-                <div class="dc-chart" id="chart-ring-injury"></div>
-                <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal2">About the Graph</button>
+            <div class="pie-chart text-center">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <h4>Sunk Year <small><a id="year">reset</a></small></h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="dc-chart" id="chart-ring-year" style="margin-top: 10px;"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal1">About the Graph</button>
+                        </td>
+                    </tr> 
+                </table>
             </div>
             <div class="pie-chart text-center">
-                <h4><br>Depth <small><a id="season">reset</a></small>
-                </h4>
-                <div class="dc-chart" id="chart-ring-season"></div>
-                <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal3">About the Graph</button>
-            </div>   
+                <table align="center">
+                    <tr>
+                        <td>
+                            <h4><br>GP-Quality Type <small><a id="injury" href="#">reset</a></small></h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="dc-chart" id="chart-ring-injury" style="margin-top: 10px;"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal2">About the Graph</button>
+                        </td>
+                    </tr> 
+                </table>
+            </div>
+            <div class="pie-chart text-center">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <h4><br>Depth <small><a id="season">reset</a></small> </h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="dc-chart" id="chart-ring-season" style="margin-top: 10px;"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal3">About the Graph</button>
+                        </td>
+                    </tr> 
+                </table>
+            </div>
         </div>
         <div class="dc-data-count dc-chart text-center" id="data-count" style="float:left; margin-bottom:20px; width: 57%;">
             <h2><b>Interactive Visualization of Worldwide ShipWreck</b></h2>
@@ -54,18 +92,18 @@
                     <div id="map" ></div>
                 </div>   
             </div>
-            <p><i>(<span style="color:lightgreen">green</span> points: High GP-Quality; <span
-                style="color:darkblue">blue</span>: Med GP-Quality; <span
-                style="color:orange">orange</span>: Low GP-Quality; <span style="color:red">red</span>:
-            Poor GP-Quality; <span style="color: #493F3F">gray</span>: Unknown)</i></p>
+            <p><i>(<span style="color:lightgreen">green</span> points: depth in [0,5); <span
+                style="color:darkblue">blue</span>: depth in [5,10); <span
+                style="color:orange">orange</span>: depth in [10,30); <span style="color:red">red</span>:
+                depth in [30,∞), unit: m)</i></p>
         </div>
         <div class="col" style="float:left; width:10%; margin-top: 57px; margin-left:20px;">
             <div class="row-xs-5 row-md-3">
-                <h4>Sound Type <small><a id="sound" href="#">reset</a></small></h4>
+                <h4>Sound Type <small><a id="sound" href="#">reset</a></small></h4> <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal4">About the Graph</button>
                 <div class="dc-chart" id="chart-continent-count"></div>
             </div>
             <div class="row-xs-5 row-md-3">
-                <h4>Feature Type <small><a id="feature" href="#">reset</a></small></h4>
+                <h4>Feature Type <small><a id="feature" href="#">reset</a></small></h4> <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal5">About the Graph</button>
                 <div class="dc-chart" id="chart-cause-count"></div>
             </div>
         </div>
@@ -111,7 +149,13 @@
 
                 var seasonDim = ndx.dimension(function (d) {
                     if (d["DEPTH"] == "") return "Unknown";
-                    return d["DEPTH"] >= 20 ? "≥20m" : "<20m";
+                    if (d["DEPTH"] < 5)
+                        return "[0,5)";
+                    if (d["DEPTH"] < 10)
+                        return "[5,10)";
+                    if (d["DEPTH"] < 30)
+                        return "[10,30)";
+                    return "[30,∞)";
                 });
                 var yearDim = ndx.dimension(function (d) {
                     if (d["YEARSUNK"] == "") return "Unknown";
@@ -302,22 +346,21 @@
                             var depth = d["DEPTH"];
                             var location = d["location"];
                             var year = d["YEARSUNK"];
-                            var link = d["href_formula"];
                             var gp_quality = d["GP_QUALITY"];
                             var history = d["HISTORY"];
 
                             var fillColor_Var = "";
 
-                            if (gp_quality == "Poor") {
-                                fillColor_Var = "red";
-                            } else if (gp_quality == "Low") {
-                                fillColor_Var = "orange";
-                            } else if (gp_quality == "High") {
+                            if (depth < 5) {
                                 fillColor_Var = "lightgreen";
-                            } else if (gp_quality == "Med") {
+                            } else if (depth < 10) {
                                 fillColor_Var = "darkblue";
+                            } else if (depth < 30) {
+                                fillColor_Var = "orange";
+                            } else if (depth != "") {
+                                fillColor_Var = "red";
                             } else {
-                                fillColor_Var = "#493F3F"
+                                fillColor_Var = "#493F3F";
                             }
 
                             var marker = L.circleMarker([latitude, longitude], {
@@ -335,9 +378,7 @@
                                 ')' + "<br>" +
                                 "<b> Sunk Year: </b>" + year + "<br>" +
                                 "<b> GP Quality: </b>" + gp_quality + "<br>" +
-                                "<b> History: </b>" + history + "<br>" +
-                                "<b> Link: </b>" + '<a href= "' + link +
-                                '" target="_blank">' + "View Report" + "</a>" + "<br>");;
+                                "<b> History: </b>" + history + "<br>");
                             wreckMarkers.addLayer(marker);
                         });
                         map.addLayer(wreckMarkers);
@@ -438,18 +479,12 @@
                         <h4 class="modal-title">Sunk Year</h4>
                     </div>
                     <div class="modal-body">
-                        <h1>SDU Visualization</h1>
-                        <h2>项目背景介绍</h2>
                         <p>
-                            广东阳江海域发生了一起沉船事故。海上风电场项目施工浮吊船“福景001”轮在广东阳江附近海域防台锚地避3号台风“暹芭”时发生意外，锚链断裂、走锚遇险，20多条鲜活的生命就这样离我们而去。无独有偶，近几十年来，随着海洋工业的发展，世界上的沉船事故屡有发生。不同与人类的主场陆地，沉船事件发生时，深邃的海洋使人们的自救和政府的搜救变得十分困难，因此总会造成十分严重的灾难。<br>
-                            我们小组了解了近年来的沉船事件后，决定使用历年来的沉船数据，制作一个Dashboard，整合归纳多年来的数据。世事无常，人生在世，我们永远无法预料意外和明天究竟哪一个会先到，很多意外的发生往往不会给人留下丝毫反应的机会，前一刻还在一起说笑的两个人，瞬间就可能会阴阳两隔。希望我们制作的项目能够对相关行业提供一定的帮助。。。。。。。
+                            在本数据集中，大部分数据没有确切的沉没年份，仅有极少的部分船沉没的具体年份，观察地图与可以发现，这些沉船大都是在极度靠近海岸或者航线的地方。观察有沉没事件的所有34组数据，有33组发生在经济大萧条之后，有25组发生在二战结束之后，因此我们认为这极有可能是为了发展经济，在开拓海岸线或修建航道时不小心失事的船只，因此被及时记录在案，有着详细的沉没时间。
                         </p>
-                        <h2>功能</h2>
-                        <ul>
-                            <li>提供可缩放、可移动的地图模块</li>
-                            <li>提供详细数据</li>
-                            <li>提供多种可交互可视化</li>
-                        </ul>
+                        <p>
+                            另外关于很多沉船为何会没有具体的沉没时间，我们也有所看法。航海业可以追溯到2500多年前，而早在公元15世纪，航海业就已经十分兴盛，无论是郑和下西洋，还是哥伦布发现新大陆、麦哲伦环球航行，都展现了当时的航海实力。然而，在多年之前，工业水平还不成熟，船只质量也良莠不齐，再加上没有今天的高科技，不知道有多少船只永远沉眠在海底。而那时也没有强大的信息统计能力和信息储备能力，因此很多船只的沉没都无法追本溯源。根据国际海洋考古组织的最新资料表明，在世界大洋的深处，仅近400年来，全世界沉入海洋的舰船就多达25万艘。如此巨大的基数，再加上对于科学家来说，很多时候船只所处的年代、沉没的原因和其内部还存有的信息远比船只的具体沉没时间更为重要，很多沉船没有具体的沉没时间也就无可厚非。
+                        </p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -469,17 +504,9 @@
                         <h4 class="modal-title">GP Quality</h4>
                     </div>
                     <div class="modal-body">
-                        <h1>SDU Visualization</h1>
-                        <h2>项目背景介绍</h2>
                         <p>
-                            2022年7月2日，广东阳江海域发生了一起沉船事故。海上风电场项目施工浮吊船“福景001”轮在广东阳江附近海域防台锚地避3号台风“暹芭”时发生意外，锚链断裂、走锚遇险，20多条鲜活的生命就这样离我们而去。无独有偶，近几十年来，随着海洋工业的发展，世界上的沉船事故屡有发生。不同与人类的主场陆地，沉船事件发生时，深邃的海洋使人们的自救和政府的搜救变得十分困难，因此总会造成十分严重的灾难。<br>
+                            本数据集有一个较为独特的离散数据为GP-Quality，翻译过来大致是定位精度。该项其实和沉船本身关系较小，更多的是测量仪器、测量方式的误差。通过看图可以发现，大致上，精度较低的数据点和精度较高的数据点相比，离海岸和航道更远。
                         </p>
-                        <h2>功能</h2>
-                        <ul>
-                            <li>提供可缩放、可移动的地图模块</li>
-                            <li>提供详细数据</li>
-                            <li>提供多种可交互可视化</li>
-                        </ul>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -496,19 +523,81 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">GP Quality</h4>
+                        <h4 class="modal-title">Depth</h4>
                     </div>
                     <div class="modal-body">
-                        <h1>SDU Visualization</h1>
-                        <h2>项目背景介绍</h2>
                         <p>
-                            2022年7月2日，广东阳江海域发生了一起沉船事故。海上风电场项目施工浮吊船“福景001”轮在广东阳江附近海域防台锚地避3号台风“暹芭”时发生意外，锚链断裂、走锚遇险，20多条鲜活的生命就这样离我们而去。无独有偶，近几十年来，随着海洋工业的发展，世界上的沉船事故屡有发生。不同与人类的主场陆地，沉船事件发生时，深邃的海洋使人们的自救和政府的搜救变得十分困难，因此总会造成十分严重的灾难。<br>
+                            ​海水透明度（seawater transparency）是海水能见度的一种量度。通常以直径30cm的白色圆盘垂直放入海水中的可见深度来表示。大洋中悬浮物较少，透明度一般可达50～60米；近海悬浮物较多，约达10～30米；河口地区因水中含有大量泥沙，常缩小至1～2米。考虑到在近海地区常使用视觉作辅助，而大洋深处更多依靠仪器和蛙人，因此我们将沉船深度分为[0m, 5m)，[5m, 10m)，[10m,  30m)和[30m, ∞)四个区间。可以看到，大部分沉船事件的船骸都处[30m, ∞)这个区间。选中不同的区间，观察地图上的分布。
                         </p>
-                        <h2>功能</h2>
                         <ul>
-                            <li>提供可缩放、可移动的地图模块</li>
-                            <li>提供详细数据</li>
-                            <li>提供多种可交互可视化</li>
+                            <li>
+                                在[0m, 5m)区间，大部分事故都发生在离海岸极近的地方，甚至就是河流入海口。
+                            </li>
+                            <li>
+                                在[5m, 10m)区间，情况与上个区间类似，大都发生在临海的航道附近。
+                            </li>
+                            <li>
+                                在[10m, 30m)区间，沉船事件的数量明显增加，其发生的地点也多出现在近海。但是出现在海峡中的也不在少数。
+                            </li>
+                            <li>
+                                在[30m, ∞)区间，大部分沉船事件的位置离海更远。
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal fade" id="myModal4" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Sound Type</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            待更新
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal fade" id="myModal5" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Feature Type</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            自古行船三分险，沉船的历史是随着航海史一起发展的，海上航行的船舶由于不同的原因，如碰撞、火灾事故、遭遇恶劣天气、违法超载运输或者船舶操纵不当等都有可能造成船舶的沉没。随着海上船舶交通日益繁重，水深优良、交通有序的通航水域是船舶安全航行的保障，沉船就成为了严重影响通航安全的重大隐患。
+                        </p>
+                        <p>
+                            在本数据集中，沉船分为四种，已沉没且对航行有危险的、已沉没但对航行没有危险的，肉眼可见的和未知的。其中已沉没且对航行有危险的占绝大多数。选中不同种类，观察地图上的分布。
+                        </p>
+                        <ul>
+                            <li>
+                                肉眼可见的沉船，大多分布在离海岸极近的地方，这些地方深度较浅，船只沉没后也容易被看到。
+                            </li>
+                            <li>
+                                已沉没但对航行没有危险的的沉船，可以看到其大部分深度都在30m以上。且其多分布在离航道较远的地方，离航道较近也大都深度较深。
+                            </li>
+                            <li>
+                                已沉没但对航行有危险的沉船，多出现在航道附近，且其平均深度相较于无危险的较浅，尤其是[0m, 10m)区间，比例显著增加。
+                            </li>
                         </ul>
                     </div>
                     <div class="modal-footer">
