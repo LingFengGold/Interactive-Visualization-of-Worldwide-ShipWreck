@@ -92,10 +92,16 @@
                     <div id="map" ></div>
                 </div>   
             </div>
-            <p><i>(<span style="color:lightgreen">green</span> points: depth in [0,5); <span
-                style="color:darkblue">blue</span>: depth in [5,10); <span
-                style="color:orange">orange</span>: depth in [10,30); <span style="color:red">red</span>:
-                depth in [30,∞), unit: m)</i></p>
+            <p>Color of a point indicates the depth</p>
+            <!-- <p><i>
+                (<span style="color:lightgreen">green</span> points: depth in [0,5); 
+                <span
+                style="color:darkblue">blue</span>: depth in [5,10); 
+                <span
+                style="color:orange">orange</span>: depth in [10,30); 
+                <span style="color:red">red</span>:
+                depth in [30,∞), unit: m)
+            </i></p> -->
         </div>
         <div class="col" style="float:left; width:10%; margin-top: 57px; margin-left:20px;">
             <div class="row-xs-5 row-md-3" style="text-align: center;">
@@ -225,7 +231,7 @@
                 injuryChart
                     .width(320)
                     .height(220)
-                    .ordinalColors(['lightgreen', 'orange', 'darkblue', 'red'])
+                    .ordinalColors(['#70f3ff', '#44cef6', '#1685a9', '#003472'])
                     .dimension(injuryDim)
                     .group(injuryGroup)
                     .innerRadius(20)
@@ -248,7 +254,7 @@
                 seasonChart
                     .width(320)
                     .height(220)
-                    .ordinalColors(['#88d670', '#DBA72E', '#ff4e50', '#034AA6', '#493F3F'])
+                    .ordinalColors(['#40E0D0', '#20B2AA', '#003472', '#1685a9'])
                     .dimension(seasonDim)
                     .group(seasonGroup)
                     .innerRadius(20)
