@@ -239,7 +239,7 @@
                 yearChart
                     .width(320)
                     .height(220)
-                    .ordinalColors(['#88d670', '#ff4e50'])
+                    .ordinalColors(['#88d670', '#F4A460'])
                     .dimension(yearDim)
                     .group(yearGroup)
                     .innerRadius(20)
@@ -405,13 +405,13 @@
                             if(unit == "Wire-drag, Feets") depth = depth * 0.3048;
 
                             if (depth < 5) {
-                                fillColor_Var = "lightgreen";
+                                fillColor_Var = "#40E0D0";
                             } else if (depth < 10) {
-                                fillColor_Var = "darkblue";
+                                fillColor_Var = "#20B2AA";
                             } else if (depth < 30) {
-                                fillColor_Var = "orange";
+                                fillColor_Var = "#1685a9";
                             } else if (depth != "") {
-                                fillColor_Var = "red";
+                                fillColor_Var = "#003472";
                             } else {
                                 fillColor_Var = "#493F3F";
                             }
