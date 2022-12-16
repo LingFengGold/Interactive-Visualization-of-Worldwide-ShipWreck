@@ -34,25 +34,6 @@
                     </tr>
                 </table>
             </div>
-            <!-- <div class="pie-chart text-center">
-                <table align="center">
-                    <tr>
-                        <td>
-                            <h4><br>GP-Quality Type <small><a id="injury" href="#">reset</a></small></h4>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="dc-chart" id="chart-ring-injury" style="margin-top: 10px;"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal2">About the Graph</button>
-                        </td>
-                    </tr> 
-                </table>
-            </div> -->
             <div class="pie-chart text-center">
                 <table align="center">
                     <tr>
@@ -92,16 +73,7 @@
                     <div id="map" ></div>
                 </div>   
             </div>
-            <p>Color of a point indicates the depth</p>
-            <!-- <p><i>
-                (<span style="color:lightgreen">green</span> points: depth in [0,5); 
-                <span
-                style="color:darkblue">blue</span>: depth in [5,10); 
-                <span
-                style="color:orange">orange</span>: depth in [10,30); 
-                <span style="color:red">red</span>:
-                depth in [30,∞), unit: m)
-            </i></p> -->
+            <p>Color of a point indicates the Depth</p>
         </div>
         <div class="col" style="float:left; width:10%; margin-top: 57px; margin-left:20px;">
             <div class="row-xs-5 row-md-3" style="text-align: center;">
@@ -220,7 +192,7 @@
                     yearGroup = yearDim.group().reduceCount(),
                     causeGroup = causeDim.group().reduceCount();
 
-                var seasonChart = dc.pieChart('#chart-ring-season'),
+                var depthchart = dc.pieChart('#chart-ring-season'),
                     yearChart = dc.pieChart('#chart-ring-year'),
                     injuryChart = dc.pieChart('#chart-ring-injury'),
                     continentCountBarChart = dc.barChart('#chart-continent-count'),
@@ -239,7 +211,7 @@
                 yearChart
                     .width(320)
                     .height(220)
-                    .ordinalColors(['#88d670', '#F4A460'])
+                    .ordinalColors(['#88d670', '#f4A460'])
                     .dimension(yearDim)
                     .group(yearGroup)
                     .innerRadius(20)
@@ -251,20 +223,19 @@
                         return order[d.key];
                     });
 
-                seasonChart
+                depthchart
                     .width(320)
                     .height(220)
-                    .ordinalColors(['#40E0D0', '#20B2AA', '#003472', '#1685a9'])
+                    .ordinalColors(['#40E0D0', '#20B2AA', '#1685a9', '#003472'])
                     .dimension(seasonDim)
                     .group(seasonGroup)
                     .innerRadius(20)
                     .ordering(function (d) {
                         var order = {
-                            'spring': 1,
-                            'summer': 2,
-                            'fall': 3,
-                            'winter': 4,
-                            'unknown': 5,
+                            '[0,5)': 1,
+                            '[5,10)': 2,
+                            '[10,30)': 3,
+                            '[30,∞)': 4,
                         };
                         return order[d.key];
                     });
@@ -445,7 +416,7 @@
                 });
 
                 d3.selectAll('a#season').on('click', function () {
-                    seasonChart.filterAll();
+                    depthchart.filterAll();
                     dc.redrawAll();
                 });
 
@@ -489,32 +460,60 @@
                     </div>
                     <div class="modal-body">
                         <h1>SDU Visualization</h1>
-                        <h2>项目背景介绍</h2>
+                        <h2>项目背景</h2>
                         <p>
-                            2022年7月2日，广东阳江海域发生了一起沉船事故。海上风电场项目施工浮吊船“福景001”轮在广东阳江附近海域防台锚地避3号台风“暹芭”时发生意外，锚链断裂、走锚遇险，20多条鲜活的生命就这样离我们而去。无独有偶，近几十年来，随着海洋工业的发展，世界上的沉船事故屡有发生。不同与人类的主场陆地，沉船事件发生时，深邃的海洋使人们的自救和政府的搜救变得十分困难，因此总会造成十分严重的灾难。<br>
-                            我们小组了解了近年来的沉船事件后，决定使用历年来的沉船数据，制作一个Dashboard，整合归纳多年来的数据。世事无常，人生在世，我们永远无法预料意外和明天究竟哪一个会先到，很多意外的发生往往不会给人留下丝毫反应的机会，前一刻还在一起说笑的两个人，瞬间就可能会阴阳两隔。希望我们制作的项目能够对相关行业提供一定的帮助。。。。。。。
+                            &emsp;&emsp;2022年7月2日，广东阳江海域发生了一起沉船事故。
+                            海上风电场项目施工浮吊船“福景001”轮在广东阳江附近海域防台锚地避3号台风“暹芭”时发生意外，
+                            锚链断裂、走锚遇险，20多条鲜活的生命就这样离我们而去。无独有偶，近几十年来，
+                            随着海洋工业的发展，世界上的沉船事故屡有发生。不同与人类的主场陆地，
+                            沉船事件发生时，深邃的海洋使人们的自救和政府的搜救变得十分困难，因此总会造成十分严重的灾难。<br>
+                            &emsp;&emsp;世事无常，人生在世，我们永远无法预料意外和明天究竟哪一个会先到，
+                            很多意外的发生往往令人猝不及防，可能前一刻还在一起说笑的两个人，瞬间就会阴阳两隔。
+                            为尽可能避免此类事件的发生，我们小组了解了近年来的沉船事件后，
+                            寻找到了美国历年沉船信息数据集并将其整合归纳，制作出当前Dashboard，
+                            其有较为详细的数据展示和较为明晰的可视化显示。
+                            希望我们的项目能够在一定程度上帮助相关行业进行数据分析，以对航海事业起到积极的作用。
                         </p>
-                        <h2>功能</h2>
+                        <h2>功能特色</h2>
                         <ul>
                             <li>提供可缩放、可移动的地图模块</li>
-                            <li>提供详细数据</li>
                             <li>提供多种可交互可视化</li>
+                            <li>提供类别选择、清空功能</li>
+                            <li>提供可视化文字说明</li>
+                            <li>提供详细数据表格</li>
                         </ul>
-                        <h2>可实现问题</h2>
+                        <h2>可视化模块</h2>
                         <ul>
-                            <li>哪些季节容易发生事故？</li>
-                            <li>不同的地方容易发生什么类型的事故？</li>
-                            <li>哪些地方是事故高发地？</li>
-                            <li>在有原因的事故中，沉船时发生的活动是什么？</li>
-                            <li>发生事故时水的深度，地点和事故类型的关系是什么？</li>
+                            <li>Sunk Year：根据沉船发生的时间具体与否进行划分</li>
+                            <li>Depth：将沉船深度统一单位后，规定范围进行划分</li>
+                            <li>GP-Quality Type：根据定位精度进行划分</li>
+                            <li>Feature Type：根据是否危害航道进行划分</li>
                         </ul>
-                        <h2>项目意义</h2>
-                        <p>使用沉船数据可以帮助我们了解沉船事件的发生情况，比如事件发生的频率、影响因素等。这有助于我们分析事故原因，并采取相应措施来预防类似事件的发生。沉船数据的分析也有助于我们了解沉船事件对海洋生态、海事交通以及经济等方面的影响，为相关部门制定政策和决策提供依据。
+                        <h2>数据预处理</h2>
+                        <p> &emsp;&emsp;考虑到我们需要在地图上进行映射，所以数据点需要有经纬度信息；
+                            同时沉船是影响航行安全的重要因素，所以数据点需要有沉船深度信息。
+                            因此我们对数据进行预处理，筛除掉深度不详和经纬度不详的数据点。
+                            原始数据集包含6222个数据点，筛选后剩余1733个数据点。<br>
+                            &emsp;&emsp;对于本数据中的深度信息，有多种不同的单位，如米、英尺等。为方便分析，
+                            我们将其统一单位至米（m）。
+                            
                         </p>
-                        <h2>项目地址</h2>
-                        <p>当前项目已部署至<a href="https://lingfenggold.github.io/">https://lingfenggold.github.io</a></p>
-                        <h2>References</h2>
-                        <p>1. Wrecks and Obstructions Database <a href="https://nauticalcharts.noaa.gov/data/wrecks-and-obstructions.html">link</a></p>
+                        <h2>项目意义</h2>
+                        <p> &emsp;&emsp;在本项目中，我们可以通过选取不同的区间，观察地图上对应数据点的分布，
+                            来观察沉船深度、对航道的危害、沉船时间、定位精度和地理位置之间的对应关系。
+                            同时放大地图可以看到部分河流、航道、港口等信息，可帮助我们进一步分析沉船与人类活动之间的关系。
+                            <br>
+                            &emsp;&emsp;使用沉船数据可以帮助我们了解沉船事件的发生情况，比如事件发生的频率、
+                            影响因素等。这有助于我们分析事故原因，并采取相应措施来预防类似事件的发生。
+                            沉船数据的分析也有助于我们了解沉船事件对海洋生态、海事交通以及经济等方面的影响，
+                            为相关部门制定政策和决策提供依据。
+                        </p>
+                        <h2>部署情况</h2>
+                        <p> &emsp;&emsp;当前项目已部署至<a href="https://lingfenggold.github.io">https://lingfenggold.github.io 。</a></p>
+                        <h2>数据来源</h2>
+                        <ul>
+                            <li> Wrecks and Obstructions Database <a href="https://nauticalcharts.noaa.gov/data/wrecks-and-obstructions.html"> link 。</a></li>
+                        </ul>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -535,10 +534,22 @@
                     </div>
                     <div class="modal-body">
                         <p>
-                            在本数据集中，大部分数据没有确切的沉没年份，仅有极少的部分船沉没的具体年份，观察地图与可以发现，这些沉船大都是在极度靠近海岸或者航线的地方。观察有沉没事件的所有34组数据，有33组发生在经济大萧条之后，有25组发生在二战结束之后，因此我们认为这极有可能是为了发展经济，在开拓海岸线或修建航道时不小心失事的船只，因此被及时记录在案，有着详细的沉没时间。
+                            &emsp;&emsp;在本数据集中，大部分数据没有确切的沉没年份，仅有极少的部分船沉没的具体年份，
+                            观察地图与可以发现，这些沉船大都是在极度靠近海岸或者航线的地方。
+                            观察有沉没事件的所有34组数据，有29组发生在经济大萧条（1933）之后，
+                            有25组发生在二战结束（1945）之后，因此我们认为这极有可能是为了发展经济，
+                            在开拓海岸线或修建航道时不小心失事的船只，因此被及时记录在案，有着详细的沉没时间。
                         </p>
                         <p>
-                            另外关于很多沉船为何会没有具体的沉没时间，我们也有所看法。航海业可以追溯到2500多年前，而早在公元15世纪，航海业就已经十分兴盛，无论是郑和下西洋，还是哥伦布发现新大陆、麦哲伦环球航行，都展现了当时的航海实力。然而，在多年之前，工业水平还不成熟，船只质量也良莠不齐，再加上没有今天的高科技，不知道有多少船只永远沉眠在海底。而那时也没有强大的信息统计能力和信息储备能力，因此很多船只的沉没都无法追本溯源。根据国际海洋考古组织的最新资料表明，在世界大洋的深处，仅近400年来，全世界沉入海洋的舰船就多达25万艘。如此巨大的基数，再加上对于科学家来说，很多时候船只所处的年代、沉没的原因和其内部还存有的信息远比船只的具体沉没时间更为重要，很多沉船没有具体的沉没时间也就无可厚非。
+                            &emsp;&emsp;另外关于很多沉船为何会没有具体的沉没时间，我们也有所看法。
+                            航海业可以追溯到2500多年前，而早在公元15世纪，航海业就已经十分兴盛，无论是郑和下西洋，
+                            还是哥伦布发现新大陆、麦哲伦环球航行，都展现了当时的航海实力。然而，在多年之前，
+                            工业水平还不成熟，船只质量也良莠不齐，再加上没有今天的高科技，
+                            不知道有多少船只永远沉眠在海底。而那时也没有强大的信息统计能力和信息储备能力，
+                            因此很多船只的沉没都无法追本溯源。根据国际海洋考古组织的最新资料表明，在世界大洋的深处，
+                            仅近400年来，全世界沉入海洋的舰船就多达25万艘。如此巨大的基数，再加上对于科学家来说，
+                            很多时候船只所处的年代、沉没的原因和其内部还存有的信息远比船只的具体沉没时间更为重要，
+                            很多沉船没有具体的沉没时间也就无可厚非。
                         </p>
                     </div>
                     <div class="modal-footer">
@@ -560,8 +571,31 @@
                     </div>
                     <div class="modal-body">
                         <p>
-                            本数据集有一个较为独特的离散数据为GP-Quality，翻译过来大致是定位精度。该项其实和沉船本身关系较小，更多的是测量仪器、测量方式的误差。通过看图可以发现，大致上，精度较低的数据点和精度较高的数据点相比，离海岸和航道更远。
+                            &emsp;&emsp;本数据集有一个较为独特的离散数据为GP-Quality，翻译过来大致是定位精度。
+                            该项其实和沉船本身关系较小，更多的是测量仪器、测量方式的误差。通过看图可以发现，大致上，
+                            精度较低的数据点和精度较高的数据点相比，离海岸和航道更远。而对于精度为poor的少数点来说，
+                            又大多数分布在离海岸极近的地方，我们推测可能是挖掘年代较早，精度较差等原因。
                         </p>
+                        <ul>
+                            <li>
+                                High
+                            </li>
+                            <p>
+                                <img src="data/images/GP-Quality-Type_High.png" style="width:93%; height:auto" alt="GP-Quality-Type_High">
+                            </p>
+                            <li>
+                                Low，Med
+                            </li>
+                            <p>
+                                <img src="data/images/GP-Quality-Type_Low_Med.png" style="width:93%; height:auto" alt="GP-Quality-Type_Low_Med">
+                            </p>
+                            <li>
+                                Poor
+                            </li>
+                            <p>
+                                <img src="data/images/GP-Quality-Type_Poor.png" style="width:93%; height:auto" alt="GP-Quality-Type_Poor">
+                            </p>
+                        </ul>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -581,24 +615,61 @@
                         <h4 class="modal-title">Depth</h4>
                     </div>
                     <div class="modal-body">
-                        <img src="data/images/test.png" style="width:100%; height:auto">
                         <p>
-                            ​海水透明度（seawater transparency）是海水能见度的一种量度。通常以直径30cm的白色圆盘垂直放入海水中的可见深度来表示。大洋中悬浮物较少，透明度一般可达50～60米；近海悬浮物较多，约达10～30米；河口地区因水中含有大量泥沙，常缩小至1～2米。考虑到在近海地区常使用视觉作辅助，而大洋深处更多依靠仪器和蛙人，因此我们将沉船深度分为[0m, 5m)，[5m, 10m)，[10m,  30m)和[30m, ∞)四个区间。可以看到，大部分沉船事件的船骸都处[30m, ∞)这个区间。选中不同的区间，观察地图上的分布。
+                            &emsp;&emsp;该图是由数据集中的沉船深度数据绘制成的饼状图，沉船深度即为船骸距离海面的距离，
+                            可用以下示意图表示。  
+                        </p>
+                        <p style="text-align: center;">
+                            <img src="data/images/The-depth-of-the-shipwreck.png" style="width:93%; height:auto" alt="The-depth-of-the-shipwreck">
+                        </p>
+                        <p>
+                            &emsp;&emsp; 海水透明度（seawater transparency）是海水能见度的一种量度。
+                            通常以直径30cm的白色圆盘垂直放入海水中的可见深度来表示。
+                            大洋中悬浮物较少，透明度一般可达50～60米；近海悬浮物较多，
+                            约达10～30米；河口地区因水中含有大量泥沙，常缩小至1～2米。
+                            考虑到在近海地区常使用视觉作辅助，
+                            而大洋深处更多依靠仪器和蛙人，因此我们将沉船深度分为[0m, 5m)，
+                            [5m, 10m)，[10m,  30m)和[30m, ∞)四个区间。可以看到，
+                            大部分沉船事件的船骸都处[30m, ∞)这个区间。可以看出大多数沉船都处于[10m, 30m)区间。
+                            选中不同的区间，观察地图上的分布。
                         </p>
                         <ul>
                             <li>
                                 在[0m, 5m)区间，大部分事故都发生在离海岸极近的地方，甚至就是河流入海口。
                             </li>
+                            <p>
+                                <img src="data/images/Depth_0.png" style="width:93%; height:auto" alt="Depth_0">
+                            </p>
                             <li>
-                                在[5m, 10m)区间，情况与上个区间类似，大都发生在临海的航道附近。
+                                在[5m, 10m)区间，情况与上个区间类似，大都分布海岸或临海的航道附近。
                             </li>
+                            <p>
+                                <img src="data/images/Depth_1.png" style="width:93%; height:auto" alt="Depth_1">
+                            </p>
                             <li>
-                                在[10m, 30m)区间，沉船事件的数量明显增加，其发生的地点也多出现在近海。但是出现在海峡中的也不在少数。
+                                在[10m, 30m)区间，沉船的数量明显增加，其分布地多位于近海，但是也有一部分位于海峡内。
                             </li>
+                            <p>
+                                <img src="data/images/Depth_2.png" style="width:93%; height:auto" alt="Depth_2">
+                            </p>
+                            <p>
+                                <img src="data/images/Depth_3.png" style="width:93%; height:auto" alt="Depth_3">
+                            </p>
                             <li>
-                                在[30m, ∞)区间，大部分沉船事件的位置离海更远。
+                                在[30m, ∞)区间，大部分沉船的位置离海更远。
                             </li>
+                            <p>
+                                <img src="data/images/Depth_4.png" style="width:93%; height:auto" alt="Depth_4">
+                            </p>
                         </ul>
+                        <p>
+                            &emsp;&emsp; 由此可以看出沉船深度在地理位置上有着一定的分布规律，
+                            大致遵循深度越深，离海岸越远。绝大部分沉船都分布在航线、海峡、港口附近，
+                            可见航行中总是有着各种意外，连特意开辟的航道和港口附近都有如此多的沉船，何况更加未知的深海。
+                        </p>
+                        <p style="text-align: center;">
+                            <img src="data/images/Depth_5.png" style="width:87%; height:auto" alt="Depth_5">
+                        </p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -618,22 +689,48 @@
                     </div>
                     <div class="modal-body">
                         <p>
-                            自古行船三分险，沉船的历史是随着航海史一起发展的，海上航行的船舶由于不同的原因，如碰撞、火灾事故、遭遇恶劣天气、违法超载运输或者船舶操纵不当等都有可能造成船舶的沉没。随着海上船舶交通日益繁重，水深优良、交通有序的通航水域是船舶安全航行的保障，沉船就成为了严重影响通航安全的重大隐患。
+                            &emsp;&emsp;自古行船三分险，沉船的历史是随着航海史一起发展的，海上航行的船舶由于不同的原因，
+                            如碰撞、火灾事故、遭遇恶劣天气、违法超载运输或者船舶操纵不当等都有可能造成船舶的沉没。
+                            随着海上船舶交通日益繁重，水深优良、交通有序的通航水域是船舶安全航行的保障，沉船就成为了严重影响通航安全的重大隐患。
                         </p>
                         <p>
-                            在本数据集中，沉船分为四种，已沉没且对航行有危险的、已沉没但对航行没有危险的，肉眼可见的和未知的。其中已沉没且对航行有危险的占绝大多数。选中不同种类，观察地图上的分布。
+                            &emsp;&emsp;在本数据集中，沉船分为四种，已沉没且对航行有危险的、已沉没但对航行没有危险的，
+                            肉眼可见的和未知的。其中已沉没且对航行有危险的占绝大多数。选中不同种类，观察地图上的分布。
                         </p>
                         <ul>
                             <li>
-                                肉眼可见的沉船，大多分布在离海岸极近的地方，这些地方深度较浅，船只沉没后也容易被看到。
+                                肉眼可见的沉船，大多分布在离海岸极近的地方，其大部分深度位于[0m, 5m)区间。
                             </li>
+                            <p>
+                                <img src="data/images/Feature-Type_0.png" style="width:93%; height:auto" alt="Feature-Type_0">
+                            </p>
+                            <p>
+                                <img src="data/images/Feature-Type_1.png" style="width:93%; height:auto" alt="Feature-Type_1">
+                            </p>
                             <li>
-                                已沉没但对航行没有危险的的沉船，可以看到其大部分深度都在30m以上。且其多分布在离航道较远的地方，离航道较近也大都深度较深。
+                                已沉没但对航行没有危险的的沉船，多分布在离航道较远的地方，离航道较近的沉船也大都深度较深。
+                                其大部分深度都在10m以上，且[30m, ∞)区间比例较大。
                             </li>
+                            <p>
+                                <img src="data/images/Feature-Type_2.png" style="width:93%; height:auto" alt="Feature-Type_2">
+                            </p>
+                            <p>
+                                <img src="data/images/Feature-Type_3.png" style="width:93%; height:auto" alt="Feature-Type_3">
+                            </p>
                             <li>
-                                已沉没但对航行有危险的沉船，多出现在航道附近，且其平均深度相较于无危险的较浅，尤其是[0m, 10m)区间，比例显著增加。
+                                已沉没但对航行有危险的沉船，多出现在航道附近，且其平均深度相较于无危险的较浅，
+                                尤其是在[0m, 10m)区间，比例显著增加；而在[30m, ∞)区间，比例大幅下降。
                             </li>
+                            <p>
+                                <img src="data/images/Feature-Type_4.png" style="width:93%; height:auto" alt="Feature-Type_4">
+                            </p>
+                            <p>
+                                <img src="data/images/Feature-Type_5.png" style="width:93%; height:auto" alt="Feature-Type_5">
+                            </p>
                         </ul>
+                        <p>
+                            &emsp;&emsp;由此可看出，航道附近的较浅的沉船对航行有着极大危害，需及时进行清理。
+                        </p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
