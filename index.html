@@ -34,7 +34,7 @@
                     </tr> 
                 </table>
             </div>
-            <div class="pie-chart text-center">
+            <!-- <div class="pie-chart text-center">
                 <table align="center">
                     <tr>
                         <td>
@@ -52,7 +52,7 @@
                         </td>
                     </tr> 
                 </table>
-            </div>
+            </div> -->
             <div class="pie-chart text-center">
                 <table align="center">
                     <tr>
@@ -98,13 +98,43 @@
                 depth in [30,∞), unit: m)</i></p>
         </div>
         <div class="col" style="float:left; width:10%; margin-top: 57px; margin-left:20px;">
-            <div class="row-xs-5 row-md-3">
-                <h4>Sound Type <small><a id="sound" href="#">reset</a></small></h4> <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal4">About the Graph</button>
-                <div class="dc-chart" id="chart-continent-count"></div>
+            <div class="row-xs-5 row-md-3" style="text-align: center;">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <h4>GP-Quality Type <small><a id="sound" href="#">reset</a></small></h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal2">About the Graph</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="dc-chart" id="chart-continent-count"></div>
+                        </td>
+                    </tr> 
+                </table>
             </div>
-            <div class="row-xs-5 row-md-3">
-                <h4>Feature Type <small><a id="feature" href="#">reset</a></small></h4> <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal5">About the Graph</button>
-                <div class="dc-chart" id="chart-cause-count"></div>
+            <div class="row-xs-5 row-md-3" style="text-align: center;">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <h4>Feature Type <small><a id="feature" href="#">reset</a></small></h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-default info" data-toggle="modal" data-target="#myModal5">About the Graph</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="dc-chart" id="chart-cause-count"></div>
+                        </td>
+                    </tr> 
+                </table>
             </div>
         </div>
         <div class="row">
@@ -148,12 +178,15 @@
                 var ndx = crossfilter(data);
 
                 var seasonDim = ndx.dimension(function (d) {
-                    if (d["DEPTH"] == "") return "Unknown";
-                    if (d["DEPTH"] < 5)
+                    let depth = d["DEPTH"], unit = d["SOUNDING_TYPE"];
+                    if(unit == "Feets") depth = depth * 0.3048;
+                    if(unit == "Fathoms") depth = depth * 1.8288;
+                    if(unit == "Wire-drag, Feets") depth = depth * 0.3048;
+                    if (depth < 5)
                         return "[0,5)";
-                    if (d["DEPTH"] < 10)
+                    if (depth < 10)
                         return "[5,10)";
-                    if (d["DEPTH"] < 30)
+                    if (depth < 30)
                         return "[10,30)";
                     return "[30,∞)";
                 });
@@ -165,7 +198,7 @@
                     return d["GP_QUALITY"];
                 });
                 var continentDim = ndx.dimension(function (d) {
-                    return d["SOUNDING_TYPE"];
+                    return d["GP_QUALITY"];
                 });
                 var causeDim = ndx.dimension(function (d) {
                     return d["FEATURE_TYPE"];
@@ -190,16 +223,16 @@
                     dataTable = dc.dataTable('#data-table');
 
                 injuryChart
-                    .width(220)
-                    .height(120)
+                    .width(320)
+                    .height(220)
                     .ordinalColors(['lightgreen', 'orange', 'darkblue', 'red'])
                     .dimension(injuryDim)
                     .group(injuryGroup)
                     .innerRadius(20)
 
                 yearChart
-                    .width(220)
-                    .height(120)
+                    .width(320)
+                    .height(220)
                     .ordinalColors(['#88d670', '#ff4e50'])
                     .dimension(yearDim)
                     .group(yearGroup)
@@ -213,8 +246,8 @@
                     });
 
                 seasonChart
-                    .width(220)
-                    .height(120)
+                    .width(320)
+                    .height(220)
                     .ordinalColors(['#88d670', '#ff4e50', '#DBA72E', '#034AA6', '#493F3F'])
                     .dimension(seasonDim)
                     .group(seasonGroup)
@@ -241,10 +274,10 @@
                     .elasticX(true)
                     .elasticY(true)
                     .brushOn(false)
-                    .centerBar(true)
-                    .barPadding(0.3)
-                    .outerPadding(1.2)
-                    .gap(30)
+                    // .centerBar(true)
+                    .barPadding(0.2)
+                    .outerPadding(0.2)
+                    // .gap(30)
                     .yAxisLabel('Count')
                     .margins({
                         top: 25,
@@ -256,7 +289,7 @@
                     .renderlet(function (chart) {
                         chart.selectAll("g.x text")
                             // .attr('dx', '-30')
-                            .attr('dx', '-20')
+                            .attr('dx', '-10')
                             .attr('dy', '25')
                             .attr('transform', "rotate(-15)");
                     });
@@ -272,7 +305,7 @@
                     .elasticX(true)
                     .elasticY(true)
                     .brushOn(false)
-                    .centerBar(true)
+                    // .centerBar(true)
                     .yAxisLabel('Count')
                     .margins({
                         top: 25,
@@ -280,14 +313,14 @@
                         bottom: 100,
                         left: 80
                     })
-                    .barPadding(0.3)
-                    .outerPadding(1)
-                    .gap(20)
+                    .barPadding(0.2)
+                    .outerPadding(0.2)
+                    // .gap(20)
                     // because of the x axix label, need to set the bootom margin a large number
                     .renderlet(function (chart) {
                         chart.selectAll("g.x text")
                             // .attr('dx', '-30')
-                            .attr('dx', '-20')
+                            .attr('dx', '-10')
                             .attr('dy', '25')
                             .attr('transform', "rotate(-15)");
                     });
@@ -350,6 +383,10 @@
                             var history = d["HISTORY"];
 
                             var fillColor_Var = "";
+                            let unit = d["SOUNDING_TYPE"];
+                            if(unit == "Feets") depth = depth * 0.3048;
+                            if(unit == "Fathoms") depth = depth * 1.8288;
+                            if(unit == "Wire-drag, Feets") depth = depth * 0.3048;
 
                             if (depth < 5) {
                                 fillColor_Var = "lightgreen";
@@ -373,7 +410,7 @@
                             });
 
                             marker.bindPopup("<b> Vesselterm: </b>" + vessel + "<br>" +
-                                "<b> Depth: </b>" + depth + "<br>" +
+                                "<b> Depth: </b>" + depth + "m<br>" +
                                 "<b> Location: </b>" + '(' + longitude + ',' + latitude +
                                 ')' + "<br>" +
                                 "<b> Sunk Year: </b>" + year + "<br>" +
@@ -543,27 +580,6 @@
                                 在[30m, ∞)区间，大部分沉船事件的位置离海更远。
                             </li>
                         </ul>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="modal fade" id="myModal4" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Sound Type</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            待更新
-                        </p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
