@@ -1,4 +1,4 @@
-# SDUVisualization
+# Interactive Visualization of Worldwide ShipWreck
 
 ## 项目背景
 
