@@ -1,4 +1,4 @@
-# SDUVisualization
+# https://github.com/LingFengGold/Interactive-Visualization-of-Worldwide-ShipWreck
 
 ## 项目背景
 
