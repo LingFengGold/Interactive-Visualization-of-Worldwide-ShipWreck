@@ -1,5 +1,25 @@
 # Interactive Visualization of Worldwide ShipWreck
 
+## 项目框架参考
+Beer Drinking Data Vizualization using dc.js, Crossfilter, and Leaflet <a href="https://github.com/austinlyons/dcjs-leaflet-untappd">link</a>
+
+[![Demo
+screenshot](demo.png)](https://austinlyons.github.io/dcjs-leaflet-untappd)
+
+**研究的问题不同：** 
+
+原框架是一个教学向的可视化框架，其目的在于让更多的人能够利用他们的框架做出个性的可视化。原框架研究的问题是饮酒的相关问题。我们的项目研究的是美国沉船事故发生的因素，因为原框架非常适合研究该类问题，所以我们选用了该框架。
+
+**数据不同：**
+
+原框架研究的是饮酒相关问题，其数据也是饮酒相关数据，数据来源不详。我们研究的是美国的沉船问题，因此我们在[美国商务部](https://www.commerce.gov/)[国家海洋和大气管理局](https://www.noaa.gov/)海岸调查办公室的网站找到了我们所需要的关于美国沉船的相关数据。另外，我们还对得到的数据进行了数据预处理，在后面我们进行了更加详细的描述。
+
+**设计不同：**
+
+我们在原框架的基础上进行了排版调整，删除了部分不适用于我们研究问题的图表。我们的项目最终保留了两幅扇形图和两幅条形图，对于原扇形图无法处理离散数据的问题，我们对其逻辑结构进行了调整，使其能将离散数据映射到范围中，转化为类别数据。与此同时我们根据我们研究问题的属性特点进行了色调的转变，例如深度，我们认为蓝色的深浅能够直观的表达深度信息。另外，为了讲清楚为什么我们要画这几张图以及我们画的这几张图能够反映出什么问题，我们在每一张图旁边添加了About the Graph模块，方便浏览者能够理解图表的用意，从而更好的使用我们设计的图表。
+
+
+
 ## 项目背景
 
  &emsp;&emsp;2022年7月2日，广东阳江海域发生了一起沉船事故。海上风电场项目施工浮吊船“福景001”轮在广东阳江附近海域防台锚地避3号台风“暹芭”时发生意外，锚链断裂、走锚遇险，20多条鲜活的生命就这样离我们而去。无独有偶，近几十年来，随着海洋工业的发展，世界上的沉船事故屡有发生。不同与人类的主场陆地，沉船事件发生时，深邃的海洋使人们的自救和政府的搜救变得十分困难，因此总会造成十分严重的灾难。
@@ -37,6 +57,9 @@
 
  &emsp;&emsp;当前项目已部署至<a href="https://lingfenggold.github.io">https://lingfenggold.github.io</a>
 
-## 数据来源
+## 数据来源与参考
 
-- Wrecks and Obstructions Database <a href="https://nauticalcharts.noaa.gov/data/wrecks-and-obstructions.html"> link</a> 。
+- Wrecks and Obstructions Database <a href="https://nauticalcharts.noaa.gov/data/wrecks-and-obstructions.html">link</a> 
+
+- Beer Drinking Data Vizualization using dc.js, Crossfilter, and Leaflet <a href="https://github.com/austinlyons/dcjs-leaflet-untappd">link</a>
+- Interactive Visualization of Worldwide Shark Attacks <a href="https://sarigai-geoair.github.io/MyWebApp/index.html">link</a>
